@@ -1,0 +1,8 @@
+<app-login
+  *ngIf="!needRegistration; else registration"
+  (toRegistration)="needRegistration = !needRegistration"
+></app-login>
+
+<ng-template #registration>
+  <app-registration (toLogin)="needRegistration = !needRegistration"></app-registration>
+</ng-template>

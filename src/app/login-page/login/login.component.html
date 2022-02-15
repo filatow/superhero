@@ -1,0 +1,46 @@
+<p-card>
+  <ng-template pTemplate="title">
+    <h2 class="text-center text-primary">Login</h2>
+  </ng-template>
+  <form id="login-form" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="field">
+      <label for="email" class="block">Email</label>
+      <input
+        id="email"
+        class="w-full"
+        type="text"
+        formControlName="email"
+        pInputText
+      />
+    </div>
+    <div class="field">
+      <label for="password" class="block">Password</label>
+      <input
+        id="password"
+        class="w-full"
+        type="password"
+        formControlName="password"
+        pInputText
+      />
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-between">
+      <button
+        label="Sign up"
+        class="p-button-link"
+        pButton
+        (click)="switchToRegistration()"
+      ></button>
+      <button
+        form="login-form"
+        type="submit"
+        label="Enter"
+        icon="pi pi-chevron-right"
+        styleClass="p-button-primary"
+        iconPos="right"
+        pButton
+      ></button>
+    </div>
+  </ng-template>
+</p-card>

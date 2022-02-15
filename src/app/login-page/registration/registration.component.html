@@ -1,0 +1,119 @@
+<p-card>
+  <ng-template pTemplate="title">
+    <h2 class="text-center text-primary">Registration</h2>
+  </ng-template>
+  <form id="registration-form" [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="field">
+      <label for="username" class="block">Username:</label>
+      <input
+        id="username"
+        class="w-full"
+        type="text"
+        formControlName="username"
+        pInputText
+      />
+      <div
+        class="validation"
+        *ngIf="form.get('username').touched && form.get('username').invalid"
+      >
+        <small class="p-error" *ngIf="form.get('username').errors.required">
+          Username is required.
+        </small>
+        <small  class="p-error" *ngIf="form.get('username').errors.minlength">
+          Username length should be
+          {{ form.get('username').errors.minlength.requiredLength }}
+          characters at least. Now only
+          {{ form.get('username').errors.minlength.actualLength }}.
+        </small>
+        <small class="p-error" *ngIf="form.get('username').errors.pattern">
+          Username should contain two words: 'kebab-case', 'camelCase', 'Space
+          Case' are allowed. Numbers and special symbols are forbidden.
+        </small>
+      </div>
+    </div>
+    <div class="field">
+      <label for="email" class="block">Email:</label>
+      <input
+        id="email"
+        class="w-full"
+        type="text"
+        formControlName="email"
+        pInputText
+      />
+      <div
+        class="validation"
+        *ngIf="form.get('email').touched && form.get('email').invalid"
+      >
+        <small class="p-error" *ngIf="form.get('email').errors.required">
+          Email is required.
+        </small>
+        <small
+          class="p-error"
+          *ngIf="form.get('email').errors.pattern"
+        >
+          Invalid Email. <br>
+          Maximum 3 dots before '@'. <br>
+          Maximum 5 letters between '@' and domain. <br>
+          Allowed domains: '.co', '.com', '.net', '.org', '.us'.
+        </small>
+      </div>
+    </div>
+    <div class="field">
+      <label for="password" class="block">Password:</label>
+      <input
+        id="password"
+        class="w-full"
+        [ngClass]="{invalid: !!form.errors?.crossFieldPasswordValidator}"
+        type="password"
+        formControlName="password"
+        pInputText
+      />
+      <div
+        class="validation"
+        *ngIf="form.get('password').touched && form.get('password').invalid"
+      >
+        <small class="p-error" *ngIf="form.get('password').errors.required">
+          Password is required.
+        </small>
+        <small class="p-error" *ngIf="form.get('password').errors.minlength">
+          Password length should be
+          {{ form.get('password').errors.minlength.requiredLength }}
+          characters at least. Now only
+          {{ form.get('password').errors.minlength.actualLength }}.
+        </small>
+        <small
+          class="p-error"
+          *ngIf="form.get('password').errors.pattern"
+        >
+          Weak password. It should contain at least: one uppercase letter, one number, one special symbol (allowed: ! $ % & - . ).
+        </small>
+        <small
+          class="p-error"
+          *ngIf="form.errors?.crossFieldPasswordValidator"
+        >
+          Password mustn't contain fragments of the username or the email. But now password includes "{{ form.errors.crossFieldPasswordValidator.forbiddenFragment }}" fragment.
+        </small>
+      </div>
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-between">
+      <button
+        label="Login"
+        class="p-button-link"
+        pButton
+        (click)="switchToLogin()"
+      ></button>
+      <button
+        form="registration-form"
+        type="submit"
+        label="Sign up"
+        icon="pi pi-chevron-right"
+        styleClass="p-button-primary"
+        iconPos="right"
+        pButton
+      ></button>
+    </div>
+  </ng-template>
+</p-card>
