@@ -2,7 +2,7 @@
   <ng-template pTemplate="title">
     <h2 class="text-center text-primary">Registration</h2>
   </ng-template>
-  <form id="registration-form" [formGroup]="form" (ngSubmit)="submit()">
+  <form id="registration-form" [formGroup]="form" (ngSubmit)="signIn()">
 
     <div class="field">
       <label for="username" class="block">Username:</label>
@@ -56,6 +56,9 @@
           Maximum 3 dots before '@'. <br>
           Maximum 5 letters between '@' and domain. <br>
           Allowed domains: '.co', '.com', '.net', '.org', '.us'.
+        </small>
+        <small class="p-error" *ngIf="form.get('email').errors.uniqueEmailValidator">
+          This email has been already used.
         </small>
       </div>
     </div>

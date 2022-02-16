@@ -1,5 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { nanoid } from 'nanoid';
+import { RegistryService } from 'src/app/services/registry.service';
+import { User } from 'src/app/shared/interfaces';
 import { ValidatorsService } from './validators.service';
 
 @Component({
@@ -13,7 +16,10 @@ export class RegistrationComponent implements OnInit {
   private passwordRe = /^(?=.*\d)(?=.*[A-Z])(?=.*[!$%&\-.])[A-Za-z0-9!$%&\-.]*$/;
   form: FormGroup;
 
-  constructor(private validatorsService: ValidatorsService) { }
+  constructor(
+    private validatorsService: ValidatorsService,
+    private registrationService: RegistryService
+  ) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -24,7 +30,8 @@ export class RegistrationComponent implements OnInit {
       ]),
       email: new FormControl(null, [
         Validators.required,
-        Validators.pattern(this.emailRe)
+        Validators.pattern(this.emailRe),
+        this.validatorsService.uniqueEmailValidator
       ]),
       password: new FormControl(null, [
         Validators.required,
@@ -37,9 +44,21 @@ export class RegistrationComponent implements OnInit {
   }
 
 
-  submit() {
+  signIn() {
     if (this.form.invalid) {
       return;
     }
+
+    console.log(`this.form `, this.form);
+
+    let newUser: User = {
+      id: nanoid(20),
+      username: this.form.value.username,
+      email: this.form.value.email,
+      password: this.form.value.password
+    }
+
+    this.registrationService.register(newUser);
+    this.form.reset();
   }
 }

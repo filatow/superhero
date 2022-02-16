@@ -2,7 +2,7 @@
   <ng-template pTemplate="title">
     <h2 class="text-center text-primary">Login</h2>
   </ng-template>
-  <form id="login-form" [formGroup]="form" (ngSubmit)="submit()">
+  <form id="login-form" [formGroup]="form" (ngSubmit)="login()">
     <div class="field">
       <label for="email" class="block">Email</label>
       <input
