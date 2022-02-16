@@ -13,8 +13,6 @@ export class RegistrationComponent implements OnInit {
   private passwordRe = /^(?=.*\d)(?=.*[A-Z])(?=.*[!$%&\-.])[A-Za-z0-9!$%&\-.]*$/;
   form: FormGroup;
 
-  @Output() toLogin: EventEmitter<void> = new EventEmitter();
-
   constructor(private validatorsService: ValidatorsService) { }
 
   ngOnInit(): void {
@@ -44,9 +42,4 @@ export class RegistrationComponent implements OnInit {
       return;
     }
   }
-
-  switchToLogin() {
-    this.toLogin.emit();
-  }
-
 }

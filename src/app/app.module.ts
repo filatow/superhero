@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginComponent } from './login-page/login/login.component';
 import { RegistrationComponent } from './login-page/registration/registration.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { RegistrationComponent } from './login-page/registration/registration.co
     FormsModule,
     ReactiveFormsModule,
 
+    AppRoutingModule,
     CardModule,
     ButtonModule,
     InputTextModule

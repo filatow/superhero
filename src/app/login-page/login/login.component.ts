@@ -9,8 +9,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   form: FormGroup;
 
-  @Output() toRegistration: EventEmitter<void> = new EventEmitter();
-
   constructor() { }
 
   ngOnInit(): void {
@@ -24,9 +22,5 @@ export class LoginComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-  }
-
-  switchToRegistration() {
-    this.toRegistration.emit();
   }
 }
