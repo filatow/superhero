@@ -11,13 +11,15 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginComponent } from './login-page/login/login.component';
 import { RegistrationComponent } from './login-page/registration/registration.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HeroSelectionPageComponent } from './hero-selection-page/hero-selection-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    HeroSelectionPageComponent
   ],
   imports: [
     BrowserModule,
