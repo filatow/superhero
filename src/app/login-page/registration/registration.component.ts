@@ -45,13 +45,11 @@ export class RegistrationComponent implements OnInit {
 
 
   signIn() {
-    if (this.form.invalid) {
-      return;
-    }
+    if (this.form.invalid) return;
 
     console.log(`this.form `, this.form);
 
-    let newUser: User = {
+    const newUser: User = {
       id: nanoid(20),
       username: this.form.value.username,
       email: this.form.value.email,

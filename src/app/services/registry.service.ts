@@ -1,11 +1,9 @@
 import { Injectable } from "@angular/core";
 import { User } from "../shared/interfaces";
 
-
-
 @Injectable({ providedIn: 'root' })
 export class RegistryService {
-  private users: Array<User> | null;
+  private users: User[] | null;
 
   constructor() {
     this.users = JSON.parse(localStorage.getItem('users'));
@@ -16,8 +14,6 @@ export class RegistryService {
   }
 
   isEmailUnique(email: string): boolean {
-    console.log(`isEmailUnique: this.users `, this.users);
-
     if (this.users) {
       const userWithEmail = this.users.find((u: User) => u.email === email);
       if (userWithEmail) return false;
@@ -34,8 +30,33 @@ export class RegistryService {
     }
 
     this.updateStorage();
+  }
 
-    const u = localStorage.getItem('users');
-    console.log(`Storage users `, u);
+  findUser(userToFind: User) {
+    console.log(`userToFind `, userToFind);
+
+    const existedUser = this.users.find((user: User) => {
+      for (let prop of Object.keys(userToFind)) {
+        if (userToFind[prop] !== user[prop]) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+    console.log(`existedUser `, existedUser);
+
+    return existedUser;
+  }
+
+  patchUserWithToken(userId: string, patch: {token: string}) {
+    const userToPatchIndex = this.users.findIndex((user: User) => user.id === userId);
+
+    Object.assign(
+      this.users[userToPatchIndex],
+      patch
+    )
+
+    this.updateStorage();
   }
 }
