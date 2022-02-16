@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/shared/interfaces';
 
@@ -11,7 +12,10 @@ import { User } from 'src/app/shared/interfaces';
 export class LoginComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -31,5 +35,9 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(user);
+
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/selection']);
+    }
   }
 }

@@ -5,12 +5,13 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginComponent } from './login-page/login/login.component';
 import { RegistrationComponent } from './login-page/registration/registration.component';
 import { AuthGuard } from './services/auth.guard';
+import { LogoutGuard } from './services/logout.guard';
 
 
 const routes: Routes = [
   {path: 'selection', component: HeroSelectionPageComponent, canActivate: [AuthGuard]},
   {
-    path: '', component: LoginPageComponent, children: [
+    path: '', component: LoginPageComponent, canActivateChild: [LogoutGuard], children: [
       { path: '', redirectTo: '/login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'registration', component: RegistrationComponent }

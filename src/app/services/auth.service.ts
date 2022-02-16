@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { nanoid } from "nanoid";
 import { HOUR_IN_MS } from "../consts";
 import { SessionToken, User } from "../shared/interfaces";
@@ -6,11 +7,13 @@ import { RegistryService } from "./registry.service";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(private registryService: RegistryService) { }
+  constructor(
+    private registryService: RegistryService,
+    private router: Router
+  ) { }
 
   login(user: User) {
     const existedUser = this.registryService.findUser(user);
-    // const sessionToken = JSON.parse(localStorage.getItem('sessionToken')); // null by default
 
     if (existedUser) {
       this.createToken();
@@ -33,6 +36,7 @@ export class AuthService {
     const sessionToken: SessionToken = JSON.parse(localStorage.getItem('sessionToken'));
     if (Date.now() > +sessionToken?.expiryDate) {
       this.logout();
+      this.router.navigate(['/login']);
     }
 
     return sessionToken;
