@@ -2,6 +2,9 @@
   <ng-template pTemplate="title">
     <h2 class="text-center text-primary">Login</h2>
   </ng-template>
+
+  <p-messages *ngIf="messages.length" [(value)]="messages"></p-messages>
+
   <form id="login-form" [formGroup]="form" (ngSubmit)="login()">
     <div class="field">
       <label for="email" class="block">Email</label>
@@ -12,6 +15,23 @@
         formControlName="email"
         pInputText
       />
+      <div
+        class="validation"
+        *ngIf="form.get('email').touched && form.get('email').invalid"
+      >
+        <small class="p-error" *ngIf="form.get('email').errors.required">
+          Email is required.
+        </small>
+        <small class="p-error" *ngIf="form.get('email').errors.pattern">
+          Invalid Email.
+        </small>
+        <small
+          class="p-error"
+          *ngIf="form.get('email').errors.uniqueEmailValidator"
+        >
+          This email has been already used.
+        </small>
+      </div>
     </div>
     <div class="field">
       <label for="password" class="block">Password</label>
@@ -22,6 +42,20 @@
         formControlName="password"
         pInputText
       />
+      <div
+        class="validation"
+        *ngIf="form.get('password').touched && form.get('password').invalid"
+      >
+        <small class="p-error" *ngIf="form.get('password').errors.required">
+          Password is required.
+        </small>
+        <small class="p-error" *ngIf="form.get('password').errors.minlength">
+          Password length should be
+          {{ form.get("password").errors.minlength.requiredLength }}
+          characters at least. Now only
+          {{ form.get("password").errors.minlength.actualLength }}.
+        </small>
+      </div>
     </div>
   </form>
   <ng-template pTemplate="footer">
@@ -39,6 +73,7 @@
         icon="pi pi-chevron-right"
         styleClass="p-button-primary"
         iconPos="right"
+        [disabled]="form.invalid || submitted"
         pButton
       ></button>
     </div>

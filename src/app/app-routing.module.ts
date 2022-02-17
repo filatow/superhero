@@ -9,9 +9,12 @@ import { LogoutGuard } from './services/logout.guard';
 
 
 const routes: Routes = [
-  {path: 'selection', component: HeroSelectionPageComponent, canActivate: [AuthGuard]},
+  { path: 'selection', component: HeroSelectionPageComponent, canActivate: [AuthGuard] },
   {
-    path: '', component: LoginPageComponent, canActivateChild: [LogoutGuard], children: [
+    path: '',
+    component: LoginPageComponent,
+    canActivateChild: [LogoutGuard],
+    children: [
       { path: '', redirectTo: '/login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'registration', component: RegistrationComponent }

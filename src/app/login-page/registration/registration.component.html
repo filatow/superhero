@@ -3,7 +3,6 @@
     <h2 class="text-center text-primary">Registration</h2>
   </ng-template>
   <form id="registration-form" [formGroup]="form" (ngSubmit)="signIn()">
-
     <div class="field">
       <label for="username" class="block">Username:</label>
       <input
@@ -20,11 +19,11 @@
         <small class="p-error" *ngIf="form.get('username').errors.required">
           Username is required.
         </small>
-        <small  class="p-error" *ngIf="form.get('username').errors.minlength">
+        <small class="p-error" *ngIf="form.get('username').errors.minlength">
           Username length should be
-          {{ form.get('username').errors.minlength.requiredLength }}
+          {{ form.get("username").errors.minlength.requiredLength }}
           characters at least. Now only
-          {{ form.get('username').errors.minlength.actualLength }}.
+          {{ form.get("username").errors.minlength.actualLength }}.
         </small>
         <small class="p-error" *ngIf="form.get('username').errors.pattern">
           Username should contain two words: 'kebab-case', 'camelCase', 'Space
@@ -48,16 +47,16 @@
         <small class="p-error" *ngIf="form.get('email').errors.required">
           Email is required.
         </small>
-        <small
-          class="p-error"
-          *ngIf="form.get('email').errors.pattern"
-        >
-          Invalid Email. <br>
-          Maximum 3 dots before '@'. <br>
-          Maximum 5 letters between '@' and domain. <br>
+        <small class="p-error" *ngIf="form.get('email').errors.pattern">
+          Invalid Email. <br />
+          Maximum 3 dots before '@'. <br />
+          Maximum 5 letters between '@' and domain. <br />
           Allowed domains: '.co', '.com', '.net', '.org', '.us'.
         </small>
-        <small class="p-error" *ngIf="form.get('email').errors.uniqueEmailValidator">
+        <small
+          class="p-error"
+          *ngIf="form.get('email').errors.uniqueEmailValidator"
+        >
           This email has been already used.
         </small>
       </div>
@@ -67,7 +66,7 @@
       <input
         id="password"
         class="w-full"
-        [ngClass]="{invalid: !!form.errors?.crossFieldPasswordValidator}"
+        [ngClass]="{ invalid: !!form.errors?.crossFieldPasswordValidator }"
         type="password"
         formControlName="password"
         pInputText
@@ -81,21 +80,19 @@
         </small>
         <small class="p-error" *ngIf="form.get('password').errors.minlength">
           Password length should be
-          {{ form.get('password').errors.minlength.requiredLength }}
+          {{ form.get("password").errors.minlength.requiredLength }}
           characters at least. Now only
-          {{ form.get('password').errors.minlength.actualLength }}.
+          {{ form.get("password").errors.minlength.actualLength }}.
         </small>
-        <small
-          class="p-error"
-          *ngIf="form.get('password').errors.pattern"
-        >
-          Weak password. It should contain at least: one uppercase letter, one number, one special symbol (allowed: ! $ % & - . ).
+        <small class="p-error" *ngIf="form.get('password').errors.pattern">
+          Weak password. It should contain at least: one uppercase letter, one
+          number, one special symbol (allowed: ! $ % & - . ).
         </small>
-        <small
-          class="p-error"
-          *ngIf="form.errors?.crossFieldPasswordValidator"
-        >
-          Password mustn't contain fragments of the username or the email. But now password includes "{{ form.errors.crossFieldPasswordValidator.forbiddenFragment }}" fragment.
+        <small class="p-error" *ngIf="form.errors?.crossFieldPasswordValidator">
+          Password mustn't contain fragments of the username or the email. But
+          now password includes "{{
+            form.errors.crossFieldPasswordValidator.forbiddenFragment
+          }}" fragment.
         </small>
       </div>
     </div>
@@ -115,6 +112,7 @@
         icon="pi pi-chevron-right"
         styleClass="p-button-primary"
         iconPos="right"
+        [disabled]="form.invalid || submitted"
         pButton
       ></button>
     </div>

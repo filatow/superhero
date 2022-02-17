@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { nanoid } from 'nanoid';
+import { PASSWORD_MIN_LENGTH, USERNAME_MIN_LENGTH, USER_ID_LENGTH } from 'src/app/consts';
 import { RegistryService } from 'src/app/services/registry.service';
 import { User } from 'src/app/shared/interfaces';
 import { ValidatorsService } from './validators.service';
@@ -26,7 +27,7 @@ export class RegistrationComponent implements OnInit {
       username: new FormControl(null, [
         Validators.required,
         Validators.pattern(this.usernameRe),
-        Validators.minLength(8)
+        Validators.minLength(USERNAME_MIN_LENGTH)
       ]),
       email: new FormControl(null, [
         Validators.required,
@@ -36,7 +37,7 @@ export class RegistrationComponent implements OnInit {
       password: new FormControl(null, [
         Validators.required,
         Validators.pattern(this.passwordRe),
-        Validators.minLength(5)
+        Validators.minLength(PASSWORD_MIN_LENGTH)
       ]),
     }, {
       validators: this.validatorsService.crossFieldPasswordValidator
@@ -50,7 +51,7 @@ export class RegistrationComponent implements OnInit {
     console.log(`this.form `, this.form);
 
     const newUser: User = {
-      id: nanoid(20),
+      id: nanoid(USER_ID_LENGTH),
       username: this.form.value.username,
       email: this.form.value.email,
       password: this.form.value.password

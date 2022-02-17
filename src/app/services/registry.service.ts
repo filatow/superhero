@@ -33,8 +33,6 @@ export class RegistryService {
   }
 
   findUser(userToFind: User) {
-    console.log(`userToFind `, userToFind);
-
     const existedUser = this.users.find((user: User) => {
       for (let prop of Object.keys(userToFind)) {
         if (userToFind[prop] !== user[prop]) {
@@ -44,7 +42,6 @@ export class RegistryService {
 
       return true;
     });
-    console.log(`existedUser `, existedUser);
 
     return existedUser;
   }

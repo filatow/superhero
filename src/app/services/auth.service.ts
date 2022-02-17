@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { nanoid } from "nanoid";
-import { HOUR_IN_MS } from "../consts";
+import { HOUR_IN_MS, SESSION_TOKEN_LENGTH } from "../consts";
 import { SessionToken, User } from "../shared/interfaces";
 import { RegistryService } from "./registry.service";
 
@@ -11,6 +11,20 @@ export class AuthService {
     private registryService: RegistryService,
     private router: Router
   ) { }
+
+  private createToken() {
+    const value = nanoid(SESSION_TOKEN_LENGTH);
+    const sessionToken: SessionToken = {
+      value,
+      expiryDate: new Date().getTime() + HOUR_IN_MS
+    }
+
+    localStorage.setItem('sessionToken', JSON.stringify(sessionToken));
+  }
+
+  private get sessionToken(): SessionToken {
+    return JSON.parse(localStorage.getItem('sessionToken'));;
+  }
 
   login(user: User) {
     const existedUser = this.registryService.findUser(user);
@@ -22,28 +36,15 @@ export class AuthService {
     }
   }
 
-  private createToken() {
-    const token = nanoid(140);
-    const sessionToken: SessionToken = {
-      value: token,
-      expiryDate: new Date().getTime() + HOUR_IN_MS
-    }
-
-    localStorage.setItem('sessionToken', JSON.stringify(sessionToken));
-  }
-
-  get sessionToken(): SessionToken {
-    const sessionToken: SessionToken = JSON.parse(localStorage.getItem('sessionToken'));
-    if (Date.now() > +sessionToken?.expiryDate) {
-      this.logout();
-      this.router.navigate(['/login']);
-    }
-
-    return sessionToken;
-  }
-
   isAuthenticated(): boolean {
-    return !!this.sessionToken;
+    return this.sessionToken && !this.tokenWasExpired();
+  }
+
+  tokenWasExpired(): boolean {
+    const token: SessionToken = this.sessionToken;
+    const wasExpired = +token?.expiryDate <= Date.now();
+
+    return token && wasExpired;
   }
 
   logout() {
