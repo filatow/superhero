@@ -4,12 +4,13 @@ import { User } from "../shared/interfaces";
 @Injectable({ providedIn: 'root' })
 export class RegistryService {
   private users: User[] | null;
+  private activeUser: User = null;
 
   constructor() {
     this.users = JSON.parse(localStorage.getItem('users'));
   }
 
-  private updateStorage() {
+  private actualizeStorage() {
     localStorage.setItem('users', JSON.stringify(this.users));
   }
 
@@ -22,14 +23,14 @@ export class RegistryService {
     return true;
   }
 
-  register(user: User) {
+  registerUser(user: User) {
     if (!this.users) {
       this.users = [user];
     } else {
       this.users.push(user);
     }
 
-    this.updateStorage();
+    this.actualizeStorage();
   }
 
   findUser(userToFind: User) {
@@ -54,6 +55,10 @@ export class RegistryService {
       patch
     )
 
-    this.updateStorage();
+    this.actualizeStorage();
+  }
+
+  setActiveUser(user: User) {
+    this.activeUser = user;
   }
 }

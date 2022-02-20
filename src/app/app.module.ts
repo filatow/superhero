@@ -8,6 +8,9 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { ChipModule } from 'primeng/chip';
+import { PanelModule } from 'primeng/panel';
+
 
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -35,7 +38,9 @@ import { HeroSelectionPageComponent } from './hero-selection-page/hero-selection
     ButtonModule,
     InputTextModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    ChipModule,
+    PanelModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

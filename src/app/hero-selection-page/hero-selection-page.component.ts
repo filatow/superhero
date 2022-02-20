@@ -7,6 +7,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./hero-selection-page.component.scss']
 })
 export class HeroSelectionPageComponent implements OnInit {
+  searchRequest: string;
 
   constructor(
     private authService: AuthService

@@ -1,10 +1,77 @@
-<p>hero-selection-page works!</p>
-
-<div class="flex justify-content-center">
+<div class="flex justify-content-end bg-primary h-5rem p-3">
   <button
+    styleClass="p-button-link"
+    class="text-0"
     label="Logout"
     pButton
     [routerLink]="['/login']"
     (click)="logout()"
   ></button>
 </div>
+
+<main class="flex flex-column justify-content-center mx-auto mt-4">
+  <p-card styleClass="search-widget" header="Find hero">
+    <div class="search-field">
+      <span class="p-input-icon-right w-full">
+        <i class="pi pi-search"></i>
+        <input
+          class="w-full"
+          type="text"
+          pInputText
+          placeholder="Search"
+          [(ngModel)]="searchRequest"
+        />
+      </span>
+    </div>
+    <div class="search-recent mt-2">
+      <p-button
+        label="Iron Man"
+        styleClass="p-button-sm p-button-outlined p-button-rounded"
+      ></p-button>
+    </div>
+    <!-- <app-alpha-select-component></app-alpha-select-component> -->
+  </p-card>
+  <p-card header="Heroes: 100" class="heroes-widget mt-3">
+    <p-panel header="Name" class="hero-card">
+      <div class="flex justify-content-between">
+        <div class="hero-card__image">
+          <img src="https://via.placeholder.com/480x640" alt="placeholder" />
+        </div>
+        <div class="hero-card__stats flex-grow-1">
+          <h4 class="ml-4">Powerstats:</h4>
+          <ol>
+            <li>
+              <span class="stat-name">intelligence </span>
+              <strong class="stat-value">81</strong>
+            </li>
+            <li>
+              <span class="stat-name">strength </span>
+              <strong class="stat-value">40</strong>
+            </li>
+            <li>
+              <span class="stat-name">speed </span>
+              <strong class="stat-value">29</strong>
+            </li>
+            <li>
+              <span class="stat-name">durability </span>
+              <strong class="stat-value">55</strong>
+            </li>
+            <li>
+              <span class="stat-name">power </span>
+              <strong class="stat-value">63</strong>
+            </li>
+            <li>
+              <span class="stat-name">combat </span>
+              <strong class="stat-value">90</strong>
+            </li>
+          </ol>
+        </div>
+        <button
+          label="Select"
+          class="p-button-success align-self-end"
+          pButton
+        ></button>
+      </div>
+    </p-panel>
+  </p-card>
+</main>

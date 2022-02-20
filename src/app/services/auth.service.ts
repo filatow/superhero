@@ -4,12 +4,14 @@ import { nanoid } from "nanoid";
 import { HOUR_IN_MS, SESSION_TOKEN_LENGTH } from "../consts";
 import { SessionToken, User } from "../shared/interfaces";
 import { RegistryService } from "./registry.service";
+import { ProfileService } from "./profile.service";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   constructor(
     private registryService: RegistryService,
-    private router: Router
+    private profileService: ProfileService,
+    private router: Router,
   ) { }
 
   private createToken() {
@@ -27,12 +29,18 @@ export class AuthService {
   }
 
   login(user: User) {
-    const existedUser = this.registryService.findUser(user);
+    const registeredUser = this.registryService.findUser(user);
 
-    if (existedUser) {
+    if (registeredUser) {
       this.createToken();
       const token = this.sessionToken.value;
-      this.registryService.patchUserWithToken(existedUser.id, {token});
+      this.registryService.patchUserWithToken(registeredUser.id, {token});
+      this.registryService.setActiveUser(registeredUser);
+
+      const userProfile = this.profileService.getProfileById(registeredUser.id);
+      if (!userProfile) {
+        this.profileService.createProfile(registeredUser.id);
+      }
     }
   }
 

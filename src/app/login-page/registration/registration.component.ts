@@ -57,7 +57,7 @@ export class RegistrationComponent implements OnInit {
       password: this.form.value.password
     }
 
-    this.registrationService.register(newUser);
+    this.registrationService.registerUser(newUser);
     this.form.reset();
   }
 }

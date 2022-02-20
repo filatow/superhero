@@ -14,3 +14,18 @@ small {
     margin: 5px auto;
   }
 }
+
+main {
+  width: 800px;
+}
+
+p-panel:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.hero-card__image {
+  max-width: 150px;
+  img {
+    width: 100%;
+  }
+}
