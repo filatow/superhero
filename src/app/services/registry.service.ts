@@ -4,14 +4,16 @@ import { User } from "../shared/interfaces";
 @Injectable({ providedIn: 'root' })
 export class RegistryService {
   private users: User[] | null;
-  private activeUser: User = null;
+  private activeUserId: string;
 
   constructor() {
     this.users = JSON.parse(localStorage.getItem('users'));
+    this.activeUserId = localStorage.getItem('activeUserId');
   }
 
   private actualizeStorage() {
     localStorage.setItem('users', JSON.stringify(this.users));
+    localStorage.setItem('activeUserId', this.activeUserId)
   }
 
   isEmailUnique(email: string): boolean {
@@ -58,7 +60,17 @@ export class RegistryService {
     this.actualizeStorage();
   }
 
-  setActiveUser(user: User) {
-    this.activeUser = user;
+  setActiveUserId(userId: string) {
+    this.activeUserId = userId;
+    this.actualizeStorage();
+  }
+
+  getActiveUserId() {
+    return this.activeUserId;
+  }
+
+  nullifyActiveUserId() {
+    this.activeUserId = null;
+    this.actualizeStorage();
   }
 }

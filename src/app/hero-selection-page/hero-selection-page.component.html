@@ -9,67 +9,89 @@
   ></button>
 </div>
 
-<main class="flex flex-column justify-content-center mx-auto mt-4">
+<main class="flex flex-column justify-content-center mx-auto py-4">
   <p-card styleClass="search-widget" header="Find hero">
-    <div class="search-field">
-      <span class="p-input-icon-right w-full">
-        <i class="pi pi-search"></i>
-        <input
-          class="w-full"
-          type="text"
-          pInputText
-          placeholder="Search"
-          [(ngModel)]="searchRequest"
-        />
-      </span>
-    </div>
-    <div class="search-recent mt-2">
+    <form class="search-form" [formGroup]="searchForm" (ngSubmit)="doSearch()">
+      <div class="search-field">
+        <span class="p-input-icon-right w-full">
+          <i class="pi pi-search"></i>
+          <input
+            class="w-full"
+            type="text"
+            placeholder="Search"
+            pInputText
+            formControlName="searchInput"
+            #searchInput
+          />
+        </span>
+      </div>
+    </form>
+    <div
+      class="search-recent flex align-items-center mt-1"
+      *ngIf="savedSearches.length"
+    >
+      <span>recent: </span>
       <p-button
-        label="Iron Man"
+        class="search-preset m-2"
+        *ngFor="let searchString of savedSearches"
+        label="{{searchString}}"
         styleClass="p-button-sm p-button-outlined p-button-rounded"
+        (click)="doSearch(searchString)"
       ></p-button>
     </div>
     <!-- <app-alpha-select-component></app-alpha-select-component> -->
   </p-card>
-  <p-card header="Heroes: 100" class="heroes-widget mt-3">
-    <p-panel header="Name" class="hero-card">
-      <div class="flex justify-content-between">
+  <p-card
+    header="Heroes: {{searchResults.length}}"
+    class="heroes-widget mt-3"
+    *ngIf="searchResults.length"
+  >
+    <p-panel
+      header="{{hero.name}}"
+      class="hero-card"
+      styleClass="mb-3"
+      *ngFor="let hero of searchResults"
+    >
+      <div class="flex justify-content-between"
+      >
         <div class="hero-card__image">
-          <img src="https://via.placeholder.com/480x640" alt="placeholder" />
+          <img src="{{hero.image.url}}" width="150" height="200" alt="{{hero.name}} photo" />
         </div>
         <div class="hero-card__stats flex-grow-1">
           <h4 class="ml-4">Powerstats:</h4>
           <ol>
             <li>
               <span class="stat-name">intelligence </span>
-              <strong class="stat-value">81</strong>
+              <strong class="stat-value">{{ hero.powerstats.intelligence }}</strong>
             </li>
             <li>
               <span class="stat-name">strength </span>
-              <strong class="stat-value">40</strong>
+              <strong class="stat-value">{{ hero.powerstats.strength }}</strong>
             </li>
             <li>
               <span class="stat-name">speed </span>
-              <strong class="stat-value">29</strong>
+              <strong class="stat-value">{{ hero.powerstats.speed }}</strong>
             </li>
             <li>
               <span class="stat-name">durability </span>
-              <strong class="stat-value">55</strong>
+              <strong class="stat-value">{{ hero.powerstats.durability }}</strong>
             </li>
             <li>
               <span class="stat-name">power </span>
-              <strong class="stat-value">63</strong>
+              <strong class="stat-value">{{ hero.powerstats.power }}</strong>
             </li>
             <li>
               <span class="stat-name">combat </span>
-              <strong class="stat-value">90</strong>
+              <strong class="stat-value">{{ hero.powerstats.combat }}</strong>
             </li>
           </ol>
         </div>
         <button
-          label="Select"
+          [label]="isHeroSelected(hero.id) ? 'selected' : 'select'"
           class="p-button-success align-self-end"
           pButton
+          (click)="selectHero(hero.id)"
+          [disabled]="isHeroSelected(hero.id)"
         ></button>
       </div>
     </p-panel>

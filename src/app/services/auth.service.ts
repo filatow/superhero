@@ -35,12 +35,13 @@ export class AuthService {
       this.createToken();
       const token = this.sessionToken.value;
       this.registryService.patchUserWithToken(registeredUser.id, {token});
-      this.registryService.setActiveUser(registeredUser);
 
       const userProfile = this.profileService.getProfileById(registeredUser.id);
       if (!userProfile) {
         this.profileService.createProfile(registeredUser.id);
       }
+
+      this.registryService.setActiveUserId(registeredUser.id);
     }
   }
 
