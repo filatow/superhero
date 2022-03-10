@@ -20,6 +20,8 @@ import { LoginComponent } from './login-page/login/login.component';
 import { RegistrationComponent } from './login-page/registration/registration.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeroSelectionPageComponent } from './hero-selection-page/hero-selection-page.component';
+import { AlphaSelectComponent } from './hero-selection-page/alpha-select/alpha-select.component';
+import { HoverClassNameDirective } from './directives/hover-class-name.directive';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { HeroSelectionPageComponent } from './hero-selection-page/hero-selection
     LoginPageComponent,
     LoginComponent,
     RegistrationComponent,
-    HeroSelectionPageComponent
+    HeroSelectionPageComponent,
+    AlphaSelectComponent,
+    HoverClassNameDirective
   ],
   imports: [
     BrowserModule,

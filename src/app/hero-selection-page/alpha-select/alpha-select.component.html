@@ -1,0 +1,30 @@
+<div class="flex flex-column">
+  <button
+    pButton
+    pRipple
+    type="button"
+    [label]="searchLetter"
+    [ngClass]="{
+      'p-button-outlined p-button-secondary bg-white': isHidden
+    }"
+    (click)="toggleAlphaButtons()"
+  ></button>
+</div>
+
+<div
+  class="alpha-buttons-container"
+  [ngClass]="{
+    'hidden': isHidden,
+    'flex flex-wrap': !isHidden
+  }"
+>
+  <button
+    *ngFor="let letter of alphabet"
+    appHoverClassName="p-button p-component"
+    pButton
+    type="button"
+    [label]="letter"
+    class="p-button-outlined bg-white"
+    (click)="searchByLetter(letter)"
+  ></button>
+</div>

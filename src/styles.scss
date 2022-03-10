@@ -29,3 +29,13 @@ main {
     width: 100%;
   }
 }
+
+.search-widget {
+  position: relative;
+  app-alpha-select {
+    width: 40px;
+    position: absolute;
+    top: 80px;
+    right: calc(100% - 1rem);
+  }
+}

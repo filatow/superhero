@@ -8,3 +8,7 @@ export const PASSWORD_MIN_LENGTH = 5;
 export const SESSION_TOKEN_LENGTH = 140;
 
 export const USER_ID_LENGTH = 20;
+
+export const CHARCODE_OF_A = 65;
+
+export const CHARCODE_OF_Z = 90;

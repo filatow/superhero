@@ -55,7 +55,9 @@ export class HeroSelectionPageComponent implements OnInit, AfterViewInit, OnDest
   }
 
   doSearch(request?: string) {
-    if (!request) {
+    if (request) {
+      this.searchForm.get('searchInput').setValue(request);
+    } else {
       request = this.searchForm.get('searchInput').value.trimEnd();
     }
 
@@ -64,12 +66,23 @@ export class HeroSelectionPageComponent implements OnInit, AfterViewInit, OnDest
       .subscribe({
         next: (response: Hero[]) => {
           this.searchResults = response;
-          console.log(`this.searchResult `, this.searchResults);
         }
       });
 
     this.profileService.saveSearchedString(request);
-    this.searchForm.reset();
+  }
+
+  doSearchByLetter(letter: string) {
+    this.searchForm.get('searchInput').setValue(letter);
+    this.apiSearchSub = this.heroesService
+      .search(letter)
+      .subscribe({
+        next: (response: Hero[]) => {
+          this.searchResults = response.filter(
+            (hero: Hero) => hero.name.startsWith(letter)
+          );
+        }
+      });
   }
 
   selectHero(heroId: string) {
@@ -91,7 +104,7 @@ export class HeroSelectionPageComponent implements OnInit, AfterViewInit, OnDest
       this.apiSearchSub.unsubscribe();
     }
 
-    if (this.apiSearchSub) {
+    if (this.searchInputSub) {
       this.searchInputSub.unsubscribe();
     }
   }

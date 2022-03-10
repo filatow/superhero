@@ -40,6 +40,7 @@ export class ProfileService {
     if (!this.profileData) {
       throw new Error('It\'s needed to create the Profile first');
     }
+    searchedString = searchedString.toLocaleLowerCase();
     const alreadySaved = this.profileData.searches.includes(searchedString);
 
     if (!alreadySaved) {

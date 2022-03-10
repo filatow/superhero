@@ -14,7 +14,7 @@ export class HeroesService {
     private http: HttpClient
   ) { }
 
-  search(searchedString: string): Observable<Array<Hero>> {
+  search(searchedString: string): Observable<Hero[]> {
     return this.http.get(`${environment.heroDbUrl}/search/${searchedString}`)
       .pipe(
         map((response: { [key: string]: any }) => {

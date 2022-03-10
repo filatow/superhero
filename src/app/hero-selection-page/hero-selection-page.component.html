@@ -39,7 +39,9 @@
         (click)="doSearch(searchString)"
       ></p-button>
     </div>
-    <!-- <app-alpha-select-component></app-alpha-select-component> -->
+    <app-alpha-select
+      (onSearchByLetter)="doSearchByLetter($event)"
+    ></app-alpha-select>
   </p-card>
   <p-card
     header="Heroes: {{searchResults.length}}"
