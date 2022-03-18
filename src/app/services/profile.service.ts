@@ -1,16 +1,28 @@
 import { Injectable } from "@angular/core";
-import { Profile } from "../shared/interfaces";
+import { Hero, Profile } from "../shared/interfaces";
+import { HeroesService } from "./heroes.service";
 import { RegistryService } from "./registry.service";
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ProfileService {
   private profileId: string;
   private profileData: Profile;
 
   constructor(
-    private registryService: RegistryService
+    private registryService: RegistryService,
+    private heroesService: HeroesService
   ) {
     this.setActualProfile(this.registryService.getActiveUserId());
+  }
+
+  getSelectedHeroIndex() {
+    return this.profileData.selectedHeroIndex;
+  }
+
+  setSelectedHeroIndex(heroId: string) {
+    this.profileData.selectedHeroIndex = this.profileData.heroes.findIndex(
+      (hero: Hero) => hero.id === heroId
+    );
   }
 
   private actualizeStorage() {
@@ -29,7 +41,8 @@ export class ProfileService {
   createProfile(userId: string) {
     const emptyProfile: Profile = {
       searches: [],
-      heroes: []
+      heroes: [],
+      selectedHeroIndex: null
     }
 
     this.setActualProfile(userId, emptyProfile);
@@ -58,12 +71,17 @@ export class ProfileService {
     this.actualizeStorage();
   }
 
-  addHero(heroId: string) {
-    this.profileData.heroes.push(heroId);
+  addHero(hero: Hero) {
+    this.profileData.heroes.push(hero);
+    this.profileData.selectedHeroIndex = this.profileData.heroes.length - 1;
     this.actualizeStorage();
   }
 
+  getHeroes() {
+    return this.profileData.heroes;
+  }
+
   isHeroInList(heroId: string): boolean {
-    return this.profileData.heroes.includes(heroId);
+    return !!this.profileData.heroes.find((hero: Hero) => hero.id === heroId);
   }
 }

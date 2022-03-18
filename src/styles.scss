@@ -19,6 +19,10 @@ main {
   width: 800px;
 }
 
+.p-tabview .p-tabview-panels {
+  padding: 0;
+}
+
 .hero-card:not(:last-child) {
   margin-bottom: 1rem;
 }
@@ -37,5 +41,16 @@ main {
     position: absolute;
     top: 80px;
     right: calc(100% - 1rem);
+  }
+}
+
+.heroes-widget {
+  .p-card {
+    position: relative;
+  }
+  .options {
+    position: absolute;
+    left: calc(100% + 0.75rem);
+    bottom: 4.75rem;
   }
 }

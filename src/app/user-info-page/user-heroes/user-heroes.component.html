@@ -1,0 +1,76 @@
+<p-card header="Heroes: {{ heroes.length }}" class="heroes-widget mt-3">
+  <p-panel
+    header="{{ hero.name }}"
+    class="hero-card"
+    styleClass="mb-3"
+    *ngFor="let hero of heroes"
+  >
+    <div class="flex justify-content-between">
+      <div class="hero-card__image">
+        <img
+          src="{{ hero.image.url }}"
+          width="150"
+          height="200"
+          alt="{{ hero.name }} photo"
+        />
+      </div>
+      <div class="hero-card__stats flex-grow-1">
+        <h4 class="ml-4">Powerstats:</h4>
+        <ol>
+          <li>
+            <span class="stat-name">intelligence </span>
+            <strong class="stat-value">{{
+              hero.powerstats.intelligence
+            }}</strong>
+          </li>
+          <li>
+            <span class="stat-name">strength </span>
+            <strong class="stat-value">{{ hero.powerstats.strength }}</strong>
+          </li>
+          <li>
+            <span class="stat-name">speed </span>
+            <strong class="stat-value">{{ hero.powerstats.speed }}</strong>
+          </li>
+          <li>
+            <span class="stat-name">durability </span>
+            <strong class="stat-value">{{ hero.powerstats.durability }}</strong>
+          </li>
+          <li>
+            <span class="stat-name">power </span>
+            <strong class="stat-value">{{ hero.powerstats.power }}</strong>
+          </li>
+          <li>
+            <span class="stat-name">combat </span>
+            <strong class="stat-value">{{ hero.powerstats.combat }}</strong>
+          </li>
+        </ol>
+      </div>
+      <div class="buttons flex flex-column justify-content-between">
+        <button
+          label="hero details"
+          class="p-button-link"
+          pButton
+          [routerLink]="['/hero-info/' + hero.id]"
+        ></button>
+        <button
+          [label]="isSelectedHero(hero.id) ? 'selected' : 'select'"
+          class="p-button-success"
+          pButton
+          (click)="selectHero(hero.id)"
+          [disabled]="isSelectedHero(hero.id)"
+        ></button>
+      </div>
+    </div>
+  </p-panel>
+
+  <div class="options">
+    <p-button
+      icon="pi pi-plus"
+      pTooltip="Add hero"
+      tooltipPosition="right"
+      showDelay="500"
+      hideDelay="150"
+      [routerLink]="['/selection']"
+    ></p-button>
+  </div>
+</p-card>

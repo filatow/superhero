@@ -1,0 +1,21 @@
+<app-header></app-header>
+
+<main class="flex flex-column justify-content-center mx-auto py-4">
+  <p-card styleClass="search-widget" header="User Information">
+    <p-tabView>
+      <p-tabPanel header="User Heroes" [selected]="true">
+        <app-user-heroes></app-user-heroes>
+      </p-tabPanel>
+      <p-tabPanel header="Battles History">
+        <ng-template pTemplate="content">
+          Battles History Content
+        </ng-template>
+      </p-tabPanel>
+      <p-tabPanel header="Powerups">
+        <ng-template pTemplate="content">
+          Powerups Content
+        </ng-template>
+      </p-tabPanel>
+    </p-tabView>
+  </p-card>
+</main>

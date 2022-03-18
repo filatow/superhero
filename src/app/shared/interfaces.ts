@@ -11,16 +11,6 @@ export interface SessionToken {
   expiryDate: number
 }
 
-export interface Profile {
-  searches: Array<any>,
-  heroes: Array<any>
-}
-
-export interface Environment {
-  production: boolean,
-  heroDbUrl: string
-}
-
 export interface Hero {
   id: string,
   name: string,
@@ -41,6 +31,16 @@ export interface Hero {
   }
 }
 
+export interface Profile {
+  searches: Array<string>,
+  heroes: Array<Hero>
+  selectedHeroIndex?: number
+}
+
+export interface Environment {
+  production: boolean,
+  heroDbUrl: string
+}
 export interface SearchError {
   response: string,
   error: string

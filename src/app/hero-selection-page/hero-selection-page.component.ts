@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { HeroesService } from '../services/heroes.service';
 import { ProfileService } from '../services/profile.service';
 import { RegistryService } from '../services/registry.service';
-import { Hero, SearchError } from '../shared/interfaces';
+import { Hero } from '../shared/interfaces';
 
 @Component({
   selector: 'app-hero-selection-page',
@@ -86,7 +86,9 @@ export class HeroSelectionPageComponent implements OnInit, AfterViewInit, OnDest
   }
 
   selectHero(heroId: string) {
-    this.profileService.addHero(heroId);
+    this.profileService.addHero(
+      this.searchResults.find((hero: Hero) => hero.id === heroId)
+    );
   }
 
   isHeroSelected(heroId: string) {

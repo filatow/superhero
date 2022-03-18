@@ -12,6 +12,8 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ChipModule } from 'primeng/chip';
 import { PanelModule } from 'primeng/panel';
+import { TabViewModule } from 'primeng/tabview';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 import { AppComponent } from './app.component';
@@ -22,6 +24,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeroSelectionPageComponent } from './hero-selection-page/hero-selection-page.component';
 import { AlphaSelectComponent } from './hero-selection-page/alpha-select/alpha-select.component';
 import { HoverClassNameDirective } from './directives/hover-class-name.directive';
+import { UserInfoPageComponent } from './user-info-page/user-info-page.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { UserHeroesComponent } from './user-info-page/user-heroes/user-heroes.component';
+import { HeroInfoPageComponent } from './hero-info-page/hero-info-page.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +37,11 @@ import { HoverClassNameDirective } from './directives/hover-class-name.directive
     RegistrationComponent,
     HeroSelectionPageComponent,
     AlphaSelectComponent,
-    HoverClassNameDirective
+    HoverClassNameDirective,
+    HeaderComponent,
+    UserHeroesComponent,
+    HeroInfoPageComponent,
+    UserInfoPageComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +58,8 @@ import { HoverClassNameDirective } from './directives/hover-class-name.directive
     MessageModule,
     ChipModule,
     PanelModule,
+    TabViewModule,
+    TooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
