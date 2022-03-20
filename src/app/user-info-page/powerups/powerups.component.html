@@ -1,0 +1,33 @@
+<p-card header="Powerups" class="powerups-widget mt-3">
+  <p-panel
+    header="{{ powerup.name }}"
+    class="powerup-card"
+    styleClass="mb-3"
+    *ngFor="let powerup of powerups"
+  >
+    <div class="flex justify-content-start">
+      <div class="powerup-card__image mr-4">
+        <img
+          [class]="{'no-uses-remain': !powerup.usesCount}"
+          src="{{ powerup.image }}"
+          width="100"
+          height="133"
+          alt="{{ powerup.name }} photo"
+        />
+      </div>
+      <div class="flex flex-grow-1 justify-content-between">
+        <div>
+          <h4>Effects of use:</h4>
+          <p>
+            {{ powerup.description.powername }}:
+            <strong>{{ powerup.description.value }}</strong>
+          </p>
+        </div>
+        <p>
+          Uses left:
+          <strong>{{ powerup.usesCount }}</strong>
+        </p>
+      </div>
+    </div>
+  </p-panel>
+</p-card>

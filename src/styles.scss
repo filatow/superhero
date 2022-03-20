@@ -20,13 +20,15 @@ main {
 }
 
 .p-tabview .p-tabview-panels {
-  padding: 0;
+  padding:  1rem 0 0 0;
 }
 
+.powerup-card:not(:last-child),
 .hero-card:not(:last-child) {
   margin-bottom: 1rem;
 }
 
+.powerup-card__image,
 .hero-card__image {
   max-width: 150px;
   img {

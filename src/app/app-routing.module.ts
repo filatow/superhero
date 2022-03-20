@@ -23,7 +23,7 @@ const routes: Routes = [
     ]
   },
   { path: 'user-info', component: UserInfoPageComponent, canActivate: [AuthGuard] },
-  { path: 'hero-info/:id', component: HeroInfoPageComponent, canActivate: [AuthGuard] }
+  { path: 'hero-info/:id', component: HeroInfoPageComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

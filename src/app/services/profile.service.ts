@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { ProfilePowerup } from "../consts";
 import { Hero, Profile } from "../shared/interfaces";
 import { HeroesService } from "./heroes.service";
 import { RegistryService } from "./registry.service";
@@ -39,13 +40,14 @@ export class ProfileService {
   }
 
   createProfile(userId: string) {
-    const emptyProfile: Profile = {
+    const newProfile: Profile = {
       searches: [],
       heroes: [],
-      selectedHeroIndex: null
+      selectedHeroIndex: null,
+      powerups: Object.values(ProfilePowerup)
     }
 
-    this.setActualProfile(userId, emptyProfile);
+    this.setActualProfile(userId, newProfile);
     this.actualizeStorage();
   }
 
@@ -84,4 +86,9 @@ export class ProfileService {
   isHeroInList(heroId: string): boolean {
     return !!this.profileData.heroes.find((hero: Hero) => hero.id === heroId);
   }
+
+  getPowerups() {
+    return this.profileData.powerups;
+  }
+
 }

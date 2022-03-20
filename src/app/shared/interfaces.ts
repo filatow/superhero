@@ -31,16 +31,28 @@ export interface Hero {
   }
 }
 
+export interface Powerup {
+  name: string,
+  image: string,
+  description: {
+    powername: string,
+    value: string
+  },
+  usesCount: number,
+}
+
 export interface Profile {
   searches: Array<string>,
   heroes: Array<Hero>
-  selectedHeroIndex?: number
+  selectedHeroIndex?: number,
+  powerups: Powerup[]
 }
 
 export interface Environment {
   production: boolean,
   heroDbUrl: string
 }
+
 export interface SearchError {
   response: string,
   error: string

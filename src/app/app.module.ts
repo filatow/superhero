@@ -28,6 +28,7 @@ import { UserInfoPageComponent } from './user-info-page/user-info-page.component
 import { HeaderComponent } from './shared/header/header.component';
 import { UserHeroesComponent } from './user-info-page/user-heroes/user-heroes.component';
 import { HeroInfoPageComponent } from './hero-info-page/hero-info-page.component';
+import { PowerupsComponent } from './user-info-page/powerups/powerups.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { HeroInfoPageComponent } from './hero-info-page/hero-info-page.component
     HeaderComponent,
     UserHeroesComponent,
     HeroInfoPageComponent,
-    UserInfoPageComponent
+    UserInfoPageComponent,
+    PowerupsComponent
   ],
   imports: [
     BrowserModule,
