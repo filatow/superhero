@@ -1,1 +1,168 @@
-<p>hero-info-page works!</p>
+<app-header></app-header>
+
+<main class="flex justify-content-center mx-auto py-4">
+  <p-card header="{{ hero.name }}" class="w-4 mr-3" styleClass="">
+    <div class="hero-page__image">
+      <img src="{{ hero.image.url }}" alt="{{ hero.name }} photo" />
+    </div>
+  </p-card>
+  <p-panel
+    header="Hero Profile"
+    class="w-7"
+    styleClass="mb-3"
+  >
+    <div class="stat-block border-bottom-1 border-gray-300">
+      <h4 class="ml-4">Powerstats:</h4>
+      <ol>
+        <li>
+          <span class="stat-name">intelligence </span>
+          <strong class="stat-value">{{
+            hero.powerstats.intelligence
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">strength </span>
+          <strong class="stat-value">{{ hero.powerstats.strength }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">speed </span>
+          <strong class="stat-value">{{ hero.powerstats.speed }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">durability </span>
+          <strong class="stat-value">{{ hero.powerstats.durability }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">power </span>
+          <strong class="stat-value">{{ hero.powerstats.power }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">combat </span>
+          <strong class="stat-value">{{ hero.powerstats.combat }}</strong>
+        </li>
+      </ol>
+    </div>
+    <div class="stat-block border-bottom-1 border-gray-300">
+      <h4 class="ml-4">Biography:</h4>
+      <ul class="list-no-style">
+        <li>
+          <span class="stat-name">full name: </span>
+          <strong class="stat-value">{{
+            hero.biography['full-name']
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">alter egos: </span>
+          <strong class="stat-value">{{
+            hero.biography['alter-egos']
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">aliases: </span>
+          <strong class="stat-value">{{
+            hero.biography['aliases']
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">place of birth: </span>
+          <strong class="stat-value">{{
+            hero.biography['place-of-birth']
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">first appearance: </span>
+          <strong class="stat-value">{{
+            hero.biography['first-appearance']
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">publisher: </span>
+          <strong class="stat-value">{{
+            hero.biography['publisher']
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">alignment: </span>
+          <strong class="stat-value">{{
+            hero.biography['alignment']
+          }}</strong>
+        </li>
+      </ul>
+    </div>
+    <div class="stat-block border-bottom-1 border-gray-300">
+      <h4 class="ml-4">Appearance:</h4>
+      <ul class="list-no-style">
+        <li>
+          <span class="stat-name">gender: </span>
+          <strong class="stat-value">{{
+            hero.appearance['gender']
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">race: </span>
+          <strong class="stat-value">{{
+            hero.appearance['race']
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">height: </span>
+          <strong class="stat-value">{{
+            hero.appearance['height']
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">weight: </span>
+          <strong class="stat-value">{{
+            hero.appearance['weight']
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">eye color: </span>
+          <strong class="stat-value">{{
+            hero.appearance['eye-color']
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">hair color: </span>
+          <strong class="stat-value">{{
+            hero.appearance['hair-color']
+          }}</strong>
+        </li>
+      </ul>
+    </div>
+    <div class="stat-block border-bottom-1 border-gray-300">
+      <h4 class="ml-4">Work:</h4>
+      <ul class="list-no-style">
+        <li>
+          <span class="stat-name">occupation: </span>
+          <strong class="stat-value">{{
+            hero.work['occupation']
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">base: </span>
+          <strong class="stat-value">{{
+            hero.work['base']
+          }}</strong>
+        </li>
+      </ul>
+    </div>
+    <div class="stat-block">
+      <h4 class="ml-4">Connections: </h4>
+      <ul class="list-no-style">
+        <li>
+          <span class="stat-name">group affiliation: </span>
+          <strong class="stat-value">{{
+            hero.connections['group-affiliation']
+          }}</strong>
+        </li>
+        <li>
+          <span class="stat-name">relatives: </span>
+          <strong class="stat-value">{{
+            hero.connections['relatives']
+          }}</strong>
+        </li>
+      </ul>
+    </div>
+  </p-panel>
+</main>

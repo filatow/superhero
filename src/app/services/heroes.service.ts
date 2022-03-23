@@ -27,17 +27,31 @@ export class HeroesService {
       )
   }
 
-  getById(id: number): Observable<Hero> {
+  getById(id: number): Observable<Hero> | null {
     return this.http.get(`${environment.heroDbUrl}/${id}`)
       .pipe(
-        map((response: { [key: string]: any }) => {
+        map((response: Hero) => {
           if (response.hasOwnProperty('error')) {
-            return [];
+            return null;
           }
-          console.log(`response.results = `, response.results);
+          console.log(`response (heroesService) = `, response);
 
-          return response.results;
+          return response;
         })
       )
   };
+
+  // getById(id: number): Observable<Hero> {
+  //   return this.http.get(`${environment.heroDbUrl}/${id}`)
+  //     .pipe(
+  //       map((response: { [key: string]: any }) => {
+  //         if (response.hasOwnProperty('error')) {
+  //           return [];
+  //         }
+  //         console.log(`response = `, response);
+
+  //         return response;
+  //       })
+  //     )
+  // };
 }

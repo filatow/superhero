@@ -6,6 +6,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginComponent } from './login-page/login/login.component';
 import { RegistrationComponent } from './login-page/registration/registration.component';
 import { AuthGuard } from './services/auth.guard';
+import { HeroResolver } from './services/hero.resolver';
 import { LogoutGuard } from './services/logout.guard';
 import { UserInfoPageComponent } from './user-info-page/user-info-page.component';
 
@@ -23,7 +24,14 @@ const routes: Routes = [
     ]
   },
   { path: 'user-info', component: UserInfoPageComponent, canActivate: [AuthGuard] },
-  { path: 'hero-info/:id', component: HeroInfoPageComponent, canActivate: [AuthGuard] },
+  {
+    path: 'hero-info/:id',
+    component: HeroInfoPageComponent,
+    canActivate: [AuthGuard],
+    resolve: {
+      hero: HeroResolver
+    }
+  },
 ];
 
 @NgModule({

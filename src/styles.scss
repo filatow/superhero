@@ -36,6 +36,12 @@ main {
   }
 }
 
+.hero-page__image {
+  img {
+    width: 100%;
+  }
+}
+
 .search-widget {
   position: relative;
   app-alpha-select {
@@ -55,4 +61,8 @@ main {
     left: calc(100% + 0.75rem);
     bottom: 4.75rem;
   }
+}
+
+.list-no-style {
+  list-style-type: none;
 }
