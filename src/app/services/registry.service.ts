@@ -13,7 +13,7 @@ export class RegistryService {
 
   private actualizeStorage() {
     localStorage.setItem('users', JSON.stringify(this.users));
-    localStorage.setItem('activeUserId', this.activeUserId)
+    localStorage.setItem('activeUserId', this.activeUserId);
   }
 
   isEmailUnique(email: string): boolean {

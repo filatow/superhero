@@ -14,6 +14,15 @@ export class ProfileService {
     this.setActualProfile(this.registryService.getActiveUserId());
   }
 
+  setActualProfile(userId: string, profile?: Profile) {
+    this.profileId = userId;
+    this.profileData = profile ? profile : this.getProfileById(userId);
+  }
+
+  getProfileById(userId: string): Profile {
+    return JSON.parse(localStorage.getItem(userId));
+  }
+
   getSelectedHeroIndex() {
     return this.profileData.selectedHeroIndex;
   }
@@ -32,15 +41,6 @@ export class ProfileService {
 
   private actualizeStorage() {
     localStorage.setItem(this.profileId, JSON.stringify(this.profileData));
-  }
-
-  getProfileById(userId: string): Profile {
-    return JSON.parse(localStorage.getItem(userId));
-  }
-
-  setActualProfile(userId: string, profile?: Profile) {
-    this.profileId = userId;
-    this.profileData = profile ? profile : this.getProfileById(userId);
   }
 
   createProfile(userId: string) {

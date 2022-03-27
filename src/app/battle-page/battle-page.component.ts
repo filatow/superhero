@@ -108,12 +108,13 @@ export class BattlePageComponent implements OnInit {
     let victoryProbability: number;
 
     for (let powerupName of this.powerupNames) {
-      const heroPowerstatValue = +this.hero.powerstats[powerupName] + +this.bonusPoints[powerupName];
-      let enemyPowerstatValue: number;
+      const DEFAULT_EQUALIZING_VALUE = 100;
+      let heroPowerstatValue: number = DEFAULT_EQUALIZING_VALUE;
+      let enemyPowerstatValue: number = DEFAULT_EQUALIZING_VALUE;
 
-      if (this.enemy.powerstats[powerupName] === null) {
-        enemyPowerstatValue = heroPowerstatValue;
-      } else {
+      if (this.hero.powerstats[powerupName] !== 'null' &&
+          this.enemy.powerstats[powerupName] !== 'null') {
+        heroPowerstatValue = +this.hero.powerstats[powerupName] + +this.bonusPoints[powerupName];
         enemyPowerstatValue = +this.enemy.powerstats[powerupName];
       }
 
@@ -124,6 +125,7 @@ export class BattlePageComponent implements OnInit {
       }
     }
     victoryProbability = heroStrongSidesCount / this.powerupNames.length;
+    console.log("victoryProbability", victoryProbability)
 
     return victoryProbability;
   }
