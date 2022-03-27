@@ -79,6 +79,15 @@
             </li>
           </ol>
         </div>
+
+      <div class="buttons flex flex-column justify-content-between">
+        <button
+          label="hero details"
+          class="p-button-link"
+          pButton
+          [routerLink]="['/hero-info/' + hero.id]"
+          icon="pi pi-link" iconPos="right"
+        ></button>
         <button
           [label]="isHeroSelected(hero.id) ? 'selected' : 'select'"
           class="p-button-success align-self-end"
@@ -86,6 +95,7 @@
           (click)="selectHero(hero.id)"
           [disabled]="isHeroSelected(hero.id)"
         ></button>
+      </div>
       </div>
     </p-panel>
   </p-card>

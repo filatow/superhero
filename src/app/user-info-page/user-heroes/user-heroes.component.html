@@ -51,6 +51,7 @@
           class="p-button-link"
           pButton
           [routerLink]="['/hero-info/' + hero.id]"
+          icon="pi pi-link" iconPos="right"
         ></button>
         <button
           [label]="isSelectedHero(hero.id) ? 'selected' : 'select'"

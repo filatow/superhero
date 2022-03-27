@@ -1,5 +1,4 @@
 export const HOUR_IN_MS = 3_600_000;
-// export const HOUR_IN_MS = 5_000;
 
 export const USERNAME_MIN_LENGTH = 5;
 
@@ -34,7 +33,7 @@ export const ProfilePowerup = {
       powername: 'power',
       value: '+10'
     },
-    usesCount: 5,
+    usesCount: DEFAULT_POWERUP_AMOUNT,
   },
   IRONMAN_NANO_ARMOR: {
     name: 'Ironman nano armor',
@@ -52,7 +51,7 @@ export const ProfilePowerup = {
       powername: 'intelligence',
       value: '+10'
     },
-    usesCount: 0,
+    usesCount: DEFAULT_POWERUP_AMOUNT,
   },
   GREEN_LANTERN_RING: {
     name: 'Green lantern\'s ring',
@@ -61,7 +60,7 @@ export const ProfilePowerup = {
       powername: 'strength',
       value: '+10'
     },
-    usesCount: 1,
+    usesCount: DEFAULT_POWERUP_AMOUNT,
   },
   FLASH_BOOTS: {
     name: 'Flash boots',

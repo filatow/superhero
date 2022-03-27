@@ -12,9 +12,7 @@ export class PowerupsComponent implements OnInit {
 
   constructor(
     public profileService: ProfileService
-  ) {
-    // this.powerups = this.profileService.getPowerups();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.powerups = this.profileService.getPowerups().sort(

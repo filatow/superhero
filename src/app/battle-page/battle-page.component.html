@@ -29,6 +29,14 @@
         </li>
       </ol>
     </div>
+    <button
+      label="hero details"
+      class="p-button-link ml-2"
+      pButton
+      [routerLink]="['/hero-info/' + hero.id]"
+      icon="pi pi-link"
+      iconPos="right"
+    ></button>
   </p-panel>
   <p-card class="flex w-4 mr-2" styleClass="w-full text-center">
     <section class="battle-start mb-6">
@@ -96,22 +104,27 @@
         </li>
       </ol>
     </div>
+    <button
+      label="hero details"
+      class="p-button-link ml-2"
+      pButton
+      [routerLink]="['/hero-info/' + enemy.id]"
+      icon="pi pi-link"
+      iconPos="right"
+    ></button>
   </p-panel>
   <p-dialog
     header="Battle Results"
     [(visible)]="displayFightModal"
     [modal]="true"
-    [style]="{'width': '50vw'}"
+    [style]="{ width: '50vw' }"
     [draggable]="false"
     [resizable]="false"
     (onHide)="hideFightModal()"
   >
-    <div
-      class="fight-preloader"
-      *ngIf="displayFightPreloader"
-    >
+    <div class="fight-preloader" *ngIf="displayFightPreloader">
       <div class="fight-animation">
-        <img src="../../assets/animations/fight.gif" alt="Fight animation">
+        <img src="../../assets/animations/fight.gif" alt="Fight animation" />
       </div>
       <p-progressBar [value]="progressBarValue"></p-progressBar>
     </div>
@@ -129,19 +142,20 @@
           'text-green-500': lastFightResult.victory,
           'text-yellow-500': !lastFightResult.victory
         }"
-      >{{ lastFightResult.victory ? 'Victory' : 'Defeat' }}</h1>
-      <small>({{ lastFightResult.time | date:'dd.MM.y HH:mm:ss' }})</small>
+      >
+        {{ lastFightResult.victory ? "Victory" : "Defeat" }}
+      </h1>
+      <small>({{ lastFightResult.time | date: "dd.MM.y HH:mm:ss" }})</small>
     </div>
-
 
     <ng-template pTemplate="footer">
       <p-button
         icon="pi pi-check"
-        (click)="displayFightModal=false"
+        (click)="displayFightModal = false"
         label="Ok"
         styleClass="p-button-text"
         *ngIf="displayFightResults"
       ></p-button>
     </ng-template>
-</p-dialog>
+  </p-dialog>
 </main>

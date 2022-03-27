@@ -1,0 +1,53 @@
+<p-table
+  [value]="fights"
+  [paginator]="true"
+  [rows]="10"
+  sortMode="multiple"
+>
+  <ng-template pTemplate="caption">
+    Total Fights: {{ fights.length }}
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="time">Date <p-sortIcon field="time"></p-sortIcon></th>
+      <th pSortableColumn="heroName">Hero <p-sortIcon field="heroName"></p-sortIcon></th>
+      <th pSortableColumn="enemyName">Enemy <p-sortIcon field="enemyName"></p-sortIcon></th>
+      <th pSortableColumn="victory">Result <p-sortIcon field="victory"></p-sortIcon></th>
+  </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-fight>
+    <tr>
+      <td>
+        <small>{{ fight.time | date: "dd.MM.y HH:mm:ss" }}</small>
+      </td>
+      <td>
+        <button
+          label="{{ fight.heroName }}"
+          class="p-button-link"
+          [ngClass]="{ 'font-semibold': fight.victory }"
+          pButton
+          [routerLink]="['/hero-info/' + fight.heroId]"
+        ></button>
+      </td>
+      <td>
+        <button
+          label="{{ fight.enemyName }}"
+          class="p-button-link"
+          [ngClass]="{ 'font-semibold': !fight.victory }"
+          pButton
+          [routerLink]="['/hero-info/' + fight.enemyId]"
+        ></button>
+      </td>
+      <td>
+        <strong
+          [ngClass]="{
+            'text-green-500': fight.victory,
+            'text-yellow-500': !fight.victory
+          }"
+        >
+          {{ fight.victory ? "Victory" : "Defeat" }}
+        </strong>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

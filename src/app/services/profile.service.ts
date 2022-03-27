@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ProfilePowerup } from "../consts";
 import { FightResult, Hero, Powerup, Profile } from "../shared/interfaces";
-// import { HeroesService } from "./heroes.service";
 import { RegistryService } from "./registry.service";
 
 @Injectable({ providedIn: 'root' })
@@ -11,7 +10,6 @@ export class ProfileService {
 
   constructor(
     private registryService: RegistryService,
-    // private heroesService: HeroesService
   ) {
     this.setActualProfile(this.registryService.getActiveUserId());
   }
@@ -110,5 +108,9 @@ export class ProfileService {
   addFightResult(result: FightResult) {
     this.profileData.fightResults.push(result);
     this.actualizeStorage();
+  }
+
+  getFightResults() {
+    return this.profileData.fightResults;
   }
 }

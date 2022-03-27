@@ -14,7 +14,7 @@ export class BattlePageComponent implements OnInit {
   enemy: Hero;
   powerups: Powerup[];
   lastFightResult: FightResult = null;
-  selectedPowerups: Powerup[];
+  selectedPowerups: Powerup[] = [];
   bonusPoints: PowerupBonusPoints = {
     intelligence: 0,
     strength: 0,
