@@ -1,6 +1,7 @@
 {
   "name": "superhero",
   "version": "0.0.0",
+  "homepage": "https://filatow.github.io/superhero/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
