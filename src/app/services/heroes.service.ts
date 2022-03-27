@@ -34,24 +34,9 @@ export class HeroesService {
           if (response.hasOwnProperty('error')) {
             return null;
           }
-          console.log(`response (heroesService) = `, response);
 
           return response;
         })
       )
   };
-
-  // getById(id: number): Observable<Hero> {
-  //   return this.http.get(`${environment.heroDbUrl}/${id}`)
-  //     .pipe(
-  //       map((response: { [key: string]: any }) => {
-  //         if (response.hasOwnProperty('error')) {
-  //           return [];
-  //         }
-  //         console.log(`response = `, response);
-
-  //         return response;
-  //       })
-  //     )
-  // };
 }

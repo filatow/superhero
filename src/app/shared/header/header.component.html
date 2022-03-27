@@ -1,17 +1,26 @@
-<div class="flex justify-content-end align-items-center bg-primary h-5rem p-3">
+<header class="flex align-items-center bg-primary h-5rem p-3">
   <button
     pButton
     type="button"
-    icon="pi pi-user"
-    [routerLink]="['/user-info']"
-    class="p-button-rounded mr-1"
+    label="Fight!"
+    [routerLink]="['/battle-page']"
+    class="p-button-warning m-auto"
   ></button>
-  <button
-    pButton
-    type="button"
-    icon="pi pi-sign-out"
-    class="p-button-rounded"
-    [routerLink]="['/login']"
-    (click)="logout()"
-  ></button>
-</div>
+  <div class="leftside-buttons">
+    <button
+      pButton
+      type="button"
+      icon="pi pi-user"
+      [routerLink]="['/user-info']"
+      class="p-button-rounded mr-1"
+    ></button>
+    <button
+      pButton
+      type="button"
+      icon="pi pi-sign-out"
+      class="p-button-rounded"
+      [routerLink]="['/login']"
+      (click)="logout()"
+    ></button>
+  </div>
+</header>

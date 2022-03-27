@@ -41,11 +41,28 @@ export interface Powerup {
   usesCount: number,
 }
 
+export interface PowerupBonusPoints {
+  intelligence: number,
+  strength: number,
+  speed: number,
+  durability: number,
+  power: number,
+  combat: number
+}
+
+export interface FightResult {
+  time: number,
+  hero: Hero,
+  enemy: Hero,
+  victory: boolean
+}
+
 export interface Profile {
   searches: Array<string>,
-  heroes: Array<Hero>
+  heroes: Array<Hero>,
   selectedHeroIndex?: number,
-  powerups: Powerup[]
+  powerups: Powerup[],
+  fightResults: FightResult[]
 }
 
 export interface Environment {

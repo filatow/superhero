@@ -30,7 +30,7 @@ main {
 
 .powerup-card__image,
 .hero-card__image {
-  max-width: 150px;
+  // max-width: 150px;
   img {
     width: 100%;
   }
@@ -65,4 +65,5 @@ main {
 
 .list-no-style {
   list-style-type: none;
+  padding-left: 25px;
 }

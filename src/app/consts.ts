@@ -15,6 +15,8 @@ export const CHARCODE_OF_Z = 90;
 
 export const DEFAULT_POWERUP_AMOUNT = 3;
 
+export const TOTAL_HERO_AMOUNT = 731;
+
 export const ProfilePowerup = {
   CAPTAIN_AMERICA_SHIELD: {
     name: 'Captain America shield',
@@ -71,3 +73,12 @@ export const ProfilePowerup = {
     usesCount: DEFAULT_POWERUP_AMOUNT,
   }
 }
+
+export const POWERUP_NAMES = [
+  'durability',
+  'power',
+  'combat',
+  'intelligence',
+  'strength',
+  'speed',
+];

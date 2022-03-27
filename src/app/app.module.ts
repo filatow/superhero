@@ -14,7 +14,9 @@ import { ChipModule } from 'primeng/chip';
 import { PanelModule } from 'primeng/panel';
 import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
-
+import { ListboxModule } from 'primeng/listbox';
+import { DialogModule } from 'primeng/dialog';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -29,6 +31,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { UserHeroesComponent } from './user-info-page/user-heroes/user-heroes.component';
 import { HeroInfoPageComponent } from './hero-info-page/hero-info-page.component';
 import { PowerupsComponent } from './user-info-page/powerups/powerups.component';
+import { BattlePageComponent } from './battle-page/battle-page.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import { PowerupsComponent } from './user-info-page/powerups/powerups.component'
     UserHeroesComponent,
     HeroInfoPageComponent,
     UserInfoPageComponent,
-    PowerupsComponent
+    PowerupsComponent,
+    BattlePageComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +66,9 @@ import { PowerupsComponent } from './user-info-page/powerups/powerups.component'
     PanelModule,
     TabViewModule,
     TooltipModule,
+    ListboxModule,
+    DialogModule,
+    ProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ProfilePowerup } from "../consts";
-import { Hero, Profile } from "../shared/interfaces";
-import { HeroesService } from "./heroes.service";
+import { FightResult, Hero, Powerup, Profile } from "../shared/interfaces";
+// import { HeroesService } from "./heroes.service";
 import { RegistryService } from "./registry.service";
 
 @Injectable({ providedIn: 'root' })
@@ -11,7 +11,7 @@ export class ProfileService {
 
   constructor(
     private registryService: RegistryService,
-    private heroesService: HeroesService
+    // private heroesService: HeroesService
   ) {
     this.setActualProfile(this.registryService.getActiveUserId());
   }
@@ -24,6 +24,12 @@ export class ProfileService {
     this.profileData.selectedHeroIndex = this.profileData.heroes.findIndex(
       (hero: Hero) => hero.id === heroId
     );
+  }
+
+  getSelectedHero() {
+    const selectedHeroIndex = this.getSelectedHeroIndex();
+
+    return this.profileData.heroes[selectedHeroIndex];
   }
 
   private actualizeStorage() {
@@ -44,7 +50,8 @@ export class ProfileService {
       searches: [],
       heroes: [],
       selectedHeroIndex: null,
-      powerups: Object.values(ProfilePowerup)
+      powerups: Object.values(ProfilePowerup),
+      fightResults: []
     }
 
     this.setActualProfile(userId, newProfile);
@@ -91,4 +98,17 @@ export class ProfileService {
     return this.profileData.powerups;
   }
 
+  decrementPowerupsCount(powerupNames: string[]) {
+    this.profileData.powerups.forEach((p: Powerup) => {
+      if (powerupNames.includes(p.name)) {
+        p.usesCount--;
+      }
+    })
+    this.actualizeStorage();
+  }
+
+  addFightResult(result: FightResult) {
+    this.profileData.fightResults.push(result);
+    this.actualizeStorage();
+  }
 }
