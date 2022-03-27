@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import { PASSWORD_MIN_LENGTH, USERNAME_MIN_LENGTH, USER_ID_LENGTH } from 'src/app/consts';
 import { RegistryService } from 'src/app/services/registry.service';
 import { User } from 'src/app/shared/interfaces';
-import { ValidatorsService } from './validators.service';
+import { ValidatorsService } from '../../services/validators.service';
 
 @Component({
   selector: 'app-registration',

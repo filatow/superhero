@@ -30,5 +30,4 @@ export class AlphaSelectComponent implements OnInit {
     this.searchLetter = letter;
     this.toggleAlphaButtons();
   }
-
 }

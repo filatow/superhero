@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { fromEvent, Observable, Subscription } from 'rxjs';
+import { POWERUP_NAMES } from '../consts';
 import { AuthService } from '../services/auth.service';
 import { HeroesService } from '../services/heroes.service';
 import { ProfileService } from '../services/profile.service';
@@ -20,6 +21,7 @@ export class HeroSelectionPageComponent implements OnInit, AfterViewInit, OnDest
   @ViewChild('searchInput') searchInputRef: ElementRef;
   searchInput$: Observable<InputEvent>;
   savedSearches: string[];
+  powerupNames = POWERUP_NAMES;
 
   constructor(
     private authService: AuthService,

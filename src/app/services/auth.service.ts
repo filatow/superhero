@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 import { nanoid } from "nanoid";
 import { HOUR_IN_MS, SESSION_TOKEN_LENGTH } from "../consts";
 import { SessionToken, User } from "../shared/interfaces";
@@ -11,7 +10,6 @@ export class AuthService {
   constructor(
     private registryService: RegistryService,
     private profileService: ProfileService,
-    private router: Router,
   ) { }
 
   private createToken() {

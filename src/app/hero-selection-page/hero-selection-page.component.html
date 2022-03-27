@@ -53,29 +53,11 @@
         <div class="hero-card__stats flex-grow-1">
           <h4 class="ml-4">Powerstats:</h4>
           <ol>
-            <li>
-              <span class="stat-name">intelligence </span>
-              <strong class="stat-value">{{ hero.powerstats.intelligence }}</strong>
-            </li>
-            <li>
-              <span class="stat-name">strength </span>
-              <strong class="stat-value">{{ hero.powerstats.strength }}</strong>
-            </li>
-            <li>
-              <span class="stat-name">speed </span>
-              <strong class="stat-value">{{ hero.powerstats.speed }}</strong>
-            </li>
-            <li>
-              <span class="stat-name">durability </span>
-              <strong class="stat-value">{{ hero.powerstats.durability }}</strong>
-            </li>
-            <li>
-              <span class="stat-name">power </span>
-              <strong class="stat-value">{{ hero.powerstats.power }}</strong>
-            </li>
-            <li>
-              <span class="stat-name">combat </span>
-              <strong class="stat-value">{{ hero.powerstats.combat }}</strong>
+            <li
+              *ngFor="let powerupName of powerupNames"
+            >
+              <span class="stat-name">{{ powerupName }} </span>
+              <strong class="stat-value">{{ hero.powerstats[powerupName] }}</strong>
             </li>
           </ol>
         </div>

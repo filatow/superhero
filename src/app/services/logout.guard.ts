@@ -12,8 +12,8 @@ export class LogoutGuard implements CanActivate, CanActivateChild {
   ) { }
 
   canActivate(
-    routeSn: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    _routeSn: ActivatedRouteSnapshot,
+    _state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> | UrlTree {
     if (!this.auth.isAuthenticated()) {
       return true;
@@ -23,8 +23,8 @@ export class LogoutGuard implements CanActivate, CanActivateChild {
   }
 
   canActivateChild(
-    routeSn: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    _routeSn: ActivatedRouteSnapshot,
+    _state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> | UrlTree {
     if (!this.auth.isAuthenticated()) {
       return true;
