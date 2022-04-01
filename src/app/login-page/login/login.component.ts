@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Message } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { PASSWORD_MIN_LENGTH } from 'src/app/consts';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/shared/interfaces';
-import { ParamsMapToMessages } from './consts';
+import { ParamsMapToMessages, COMMON_EMAIL_RE } from '../consts';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-  private commonEmailRe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+export class LoginComponent implements OnInit, OnDestroy {
   form: FormGroup;
   messages: Message[] = [];
+  routeQueryParamsSub: Subscription;
 
   constructor(
     private authService: AuthService,
@@ -23,13 +24,13 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((params: Params) => {
+  private messagesInit() {
+    this.routeQueryParamsSub = this.route.queryParams.subscribe((params: Params) => {
       const messages: Message[] = [];
-      const ProcessibleParams = Object.keys(ParamsMapToMessages);
+      const processibleParams = Object.keys(ParamsMapToMessages);
 
       for (let param of Object.keys(params)) {
-        if (ProcessibleParams.includes(param)) {
+        if (processibleParams.includes(param)) {
           messages.push({
             severity: ParamsMapToMessages[param].severity,
             detail: ParamsMapToMessages[param].detail
@@ -39,15 +40,22 @@ export class LoginComponent implements OnInit {
 
       this.messages = messages;
     })
+  }
 
+  private formInit() {
     this.form = new FormGroup({
       email: new FormControl(null, [
-        Validators.required, Validators.pattern(this.commonEmailRe)
+        Validators.required, Validators.pattern(COMMON_EMAIL_RE)
       ]),
       password: new FormControl(null, [
         Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH)
       ]),
     });
+  }
+
+  ngOnInit(): void {
+    this.messagesInit();
+    this.formInit();
   }
 
   login() {
@@ -71,5 +79,9 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.routeQueryParamsSub.unsubscribe();
   }
 }

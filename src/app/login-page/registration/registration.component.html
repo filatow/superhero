@@ -2,7 +2,10 @@
   <ng-template pTemplate="title">
     <h2 class="text-center text-primary">Registration</h2>
   </ng-template>
-  <form id="registration-form" [formGroup]="form" (ngSubmit)="signIn()">
+
+  <p-messages *ngIf="messages.length" [(value)]="messages"></p-messages>
+
+  <form id="registration-form" [formGroup]="form">
     <div class="field">
       <label for="username" class="block">Username:</label>
       <input
@@ -114,6 +117,7 @@
         iconPos="right"
         [disabled]="form.invalid || submitted"
         pButton
+        (click)="signUp()"
       ></button>
     </div>
   </ng-template>
