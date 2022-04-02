@@ -63,15 +63,20 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
+    const {email, password} = this.form.value;
     const user: User = {
-      email: this.form.value.email,
-      password: this.form.value.password,
+      email,
+      password,
     }
 
     this.authService.login(user);
 
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/selection']);
+      this.router.navigate(['/selection'],  {
+        queryParams: {
+          doSearchByLetter: 'A'
+        }
+      });
     } else {
       this.router.navigate(['/login'], {
         queryParams: {

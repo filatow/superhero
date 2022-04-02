@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { POWERUP_NAMES } from '../consts';
 import { AuthService } from '../services/auth.service';
@@ -15,6 +16,7 @@ import { Hero } from '../shared/interfaces';
 })
 export class HeroSelectionPageComponent implements OnInit, AfterViewInit, OnDestroy {
   searchForm: FormGroup;
+  routeQueryParamsSub: Subscription;
   apiSearchSub: Subscription;
   searchInputSub: Subscription;
   searchResults: Hero[] = [];
@@ -27,8 +29,31 @@ export class HeroSelectionPageComponent implements OnInit, AfterViewInit, OnDest
     private authService: AuthService,
     private registryService: RegistryService,
     private heroesService: HeroesService,
-    public profileService: ProfileService
+    private profileService: ProfileService,
+    private route: ActivatedRoute,
   ) {}
+
+  private formInit() {
+    this.searchForm = new FormGroup({
+      searchInput: new FormControl(null, [])
+    });
+  }
+
+  private savedSearchesInit() {
+    this.savedSearches = this.profileService.getSavedSearches();
+  }
+
+  private processQueryParams() {
+    this.routeQueryParamsSub = this.route.queryParams.subscribe((params: Params) => {
+      if (params.doSearchByLetter) {
+        this.doSearchByLetter(params.doSearchByLetter);
+      }
+
+      if (params.doSearch) {
+        this.doSearch(params.doSearch);
+      }
+    })
+  }
 
   private sanitizeSearchInput = (inputEvent: InputEvent) => {
     const inputElement = inputEvent.target as HTMLInputElement;
@@ -42,11 +67,9 @@ export class HeroSelectionPageComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngOnInit(): void {
-    this.searchForm = new FormGroup({
-      searchInput: new FormControl(null, [])
-    });
-
-    this.savedSearches = this.profileService.getSavedSearches();
+    this.formInit();
+    this.savedSearchesInit();
+    this.processQueryParams();
   }
 
   ngAfterViewInit(): void {
@@ -110,6 +133,10 @@ export class HeroSelectionPageComponent implements OnInit, AfterViewInit, OnDest
 
     if (this.searchInputSub) {
       this.searchInputSub.unsubscribe();
+    }
+
+    if (this.routeQueryParamsSub) {
+      this.routeQueryParamsSub.unsubscribe();
     }
   }
 }
