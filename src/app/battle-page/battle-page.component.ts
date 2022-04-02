@@ -51,7 +51,7 @@ export class BattlePageComponent implements OnInit {
   private setPowerups() {
     this.powerups = this.profileService.getPowerups()
     .sort(
-      (a: Powerup, b: Powerup) => b.usesCount - a.usesCount
+      (a: Powerup, b: Powerup) => (b.name > a.name) ? -1 : 1
     ).map((p: Powerup) => {
       p['inactive'] = !p.usesCount;
       return p;
@@ -125,7 +125,6 @@ export class BattlePageComponent implements OnInit {
       }
     }
     victoryProbability = heroStrongSidesCount / this.powerupNames.length;
-    console.log("victoryProbability", victoryProbability)
 
     return victoryProbability;
   }

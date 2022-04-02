@@ -16,7 +16,7 @@ export class PowerupsComponent implements OnInit {
 
   ngOnInit(): void {
     this.powerups = this.profileService.getPowerups().sort(
-      (a: Powerup , b: Powerup) => b.usesCount - a.usesCount
+      (a: Powerup , b: Powerup) => (b.name > a.name) ? -1 : 1
     );
   }
 
