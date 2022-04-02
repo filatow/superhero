@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription, timer } from 'rxjs';
 import { POWERUP_NAMES } from '../consts';
 import { ProfileService } from '../services/profile.service';
 import { FightResult, Hero, Powerup, PowerupBonusPoints } from '../shared/interfaces';
+import { DEFAULT_POWERUP_BONUS_POINTS } from './consts';
 
 @Component({
   selector: 'app-battle-page',
@@ -15,22 +17,13 @@ export class BattlePageComponent implements OnInit {
   powerups: Powerup[];
   lastFightResult: FightResult = null;
   selectedPowerups: Powerup[] = [];
-  bonusPoints: PowerupBonusPoints = {
-    intelligence: 0,
-    strength: 0,
-    speed: 0,
-    durability: 0,
-    power: 0,
-    combat: 0
-  };
+  bonusPoints: PowerupBonusPoints = DEFAULT_POWERUP_BONUS_POINTS;
   powerupNames: string[] = POWERUP_NAMES;
 
+  fightTimerSub: Subscription;
   displayFightModal = false;
   displayFightPreloader = true;
   displayFightResults = false;
-  progressBarValue = 0;
-  private fightPreloaderAnimationInterval: ReturnType<typeof setInterval>;
-  private fightPreloaderAnimationTimeout: ReturnType<typeof setTimeout>;
 
   constructor(
     private profileService: ProfileService,
@@ -58,21 +51,29 @@ export class BattlePageComponent implements OnInit {
     });
   }
 
-  private executeFightAnimation() {
-    this.progressBarValue = 0;
-    this.fightPreloaderAnimationInterval = setInterval(() => {
-      this.progressBarValue += 25;
-      if (this.progressBarValue >= 100) {
-        this.progressBarValue = 100;
-        clearInterval(this.fightPreloaderAnimationInterval);
-      }
-    }, 1000);
+  private executeFightProcess() {
+    this.fightTimerSub = timer(5000).subscribe({
+      next: () => {
+        this.displayFightPreloader = false;
+        this.displayFightResults = true;
 
-    this.fightPreloaderAnimationTimeout = setTimeout(() => {
-      this.displayFightPreloader = false;
-      this.displayFightResults = true;
-      clearTimeout(this.fightPreloaderAnimationTimeout);
-    }, 5000);
+        this.lastFightResult = this.getFightResult();
+        this.profileService.addFightResult(this.lastFightResult);
+
+        this.reviseProfilePowerups();
+        this.setPowerups();
+
+        this.resetBonusPoints();
+        this.clearSelectedPowerups();
+      },
+      complete: () => {
+        this.fightTimerSub.unsubscribe();
+      }
+    })
+  }
+
+  private interruptFightProcess() {
+    this.fightTimerSub.unsubscribe();
   }
 
   showFightModal() {
@@ -80,10 +81,9 @@ export class BattlePageComponent implements OnInit {
   }
 
   hideFightModal() {
+    this.interruptFightProcess();
     this.displayFightPreloader = true;
     this.displayFightResults = false;
-    clearInterval(this.fightPreloaderAnimationInterval);
-    clearTimeout(this.fightPreloaderAnimationTimeout);
   }
 
   resetBonusPoints() {
@@ -105,10 +105,9 @@ export class BattlePageComponent implements OnInit {
 
   getVictoryProbability(): number {
     let heroStrongSidesCount = 0;
-    let victoryProbability: number;
+    const DEFAULT_EQUALIZING_VALUE = 100;
 
     for (let powerupName of this.powerupNames) {
-      const DEFAULT_EQUALIZING_VALUE = 100;
       let heroPowerstatValue: number = DEFAULT_EQUALIZING_VALUE;
       let enemyPowerstatValue: number = DEFAULT_EQUALIZING_VALUE;
 
@@ -124,9 +123,8 @@ export class BattlePageComponent implements OnInit {
         heroStrongSidesCount += 0.5;
       }
     }
-    victoryProbability = heroStrongSidesCount / this.powerupNames.length;
 
-    return victoryProbability;
+    return heroStrongSidesCount / this.powerupNames.length;
   }
 
   getFightResult(): FightResult {
@@ -148,15 +146,6 @@ export class BattlePageComponent implements OnInit {
 
   fight() {
     this.showFightModal();
-    this.executeFightAnimation();
-
-    this.lastFightResult = this.getFightResult();
-    this.profileService.addFightResult(this.lastFightResult);
-
-    this.reviseProfilePowerups();
-    this.setPowerups();
-
-    this.resetBonusPoints();
-    this.clearSelectedPowerups();
+    this.executeFightProcess();
   }
 }

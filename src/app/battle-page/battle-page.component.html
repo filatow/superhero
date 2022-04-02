@@ -126,7 +126,12 @@
       <div class="fight-animation">
         <img src="../../assets/animations/fight.gif" alt="Fight animation" />
       </div>
-      <p-progressBar [value]="progressBarValue"></p-progressBar>
+      <!-- <p-progressBar
+        [value]="progressBarValue"
+      ></p-progressBar> -->
+      <p-progressBar
+        mode="indeterminate"
+      ></p-progressBar>
     </div>
     <div
       class="fight-results flex flex-column justify-content-center w-full text-center"
