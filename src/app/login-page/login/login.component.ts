@@ -58,6 +58,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.formInit();
   }
 
+  getControl(controlName: string) {
+    return this.form.get(controlName);
+  }
+
+  getControlErrors(controlName: string) {
+    return this.form.get(controlName).errors;
+  }
+
   login() {
     if (this.form.invalid) {
       return;

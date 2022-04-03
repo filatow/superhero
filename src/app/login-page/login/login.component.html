@@ -17,17 +17,17 @@
       />
       <div
         class="validation"
-        *ngIf="form.get('email').touched && form.get('email').invalid"
+        *ngIf="getControl('email').touched && getControl('email').invalid"
       >
-        <small class="p-error" *ngIf="form.get('email').errors.required">
+        <small class="p-error" *ngIf="getControlErrors('email').required">
           Email is required.
         </small>
-        <small class="p-error" *ngIf="form.get('email').errors.pattern">
+        <small class="p-error" *ngIf="getControlErrors('email').pattern">
           Invalid Email.
         </small>
         <small
           class="p-error"
-          *ngIf="form.get('email').errors.uniqueEmailValidator"
+          *ngIf="getControlErrors('email').uniqueEmailValidator"
         >
           This email has been already used.
         </small>
@@ -44,16 +44,16 @@
       />
       <div
         class="validation"
-        *ngIf="form.get('password').touched && form.get('password').invalid"
+        *ngIf="getControl('password').touched && getControl('password').invalid"
       >
-        <small class="p-error" *ngIf="form.get('password').errors.required">
+        <small class="p-error" *ngIf="getControlErrors('password').required">
           Password is required.
         </small>
-        <small class="p-error" *ngIf="form.get('password').errors.minlength">
+        <small class="p-error" *ngIf="getControlErrors('password').minlength">
           Password length should be
-          {{ form.get("password").errors.minlength.requiredLength }}
+          {{ getControlErrors('password').minlength.requiredLength }}
           characters at least. Now only
-          {{ form.get("password").errors.minlength.actualLength }}.
+          {{ getControlErrors('password').minlength.actualLength }}.
         </small>
       </div>
     </div>
