@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ProfilePowerup } from "../consts";
 import { FightResult, Hero, Powerup, Profile } from "../shared/interfaces";
 import { RegistryService } from "./registry.service";
+import { StorageService } from "./storage.service";
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
@@ -10,6 +11,7 @@ export class ProfileService {
 
   constructor(
     private registryService: RegistryService,
+    private storageService: StorageService,
   ) {
     this.setActualProfile(this.registryService.getActiveUserId());
   }
@@ -20,7 +22,7 @@ export class ProfileService {
   }
 
   getProfileById(userId: string): Profile {
-    return JSON.parse(localStorage.getItem(userId));
+    return this.storageService.getItem(userId);
   }
 
   getSelectedHeroIndex() {
@@ -40,7 +42,7 @@ export class ProfileService {
   }
 
   private actualizeStorage() {
-    localStorage.setItem(this.profileId, JSON.stringify(this.profileData));
+    this.storageService.setItem(this.profileId, this.profileData);
   }
 
   createProfile(userId: string) {

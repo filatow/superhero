@@ -1,19 +1,23 @@
 import { Injectable } from "@angular/core";
 import { User } from "../shared/interfaces";
+import { StorageService } from "./storage.service";
 
 @Injectable({ providedIn: 'root' })
 export class RegistryService {
   private users: User[] | null;
   private activeUserId: string;
 
-  constructor() {
-    this.users = JSON.parse(localStorage.getItem('users'));
-    this.activeUserId = localStorage.getItem('activeUserId');
+  constructor(
+    private storageService: StorageService
+  ) {
+    this.users = this.storageService.getItem('users');
+    this.activeUserId = this.storageService.getItem('activeUserId');
+
   }
 
   private actualizeStorage() {
-    localStorage.setItem('users', JSON.stringify(this.users));
-    localStorage.setItem('activeUserId', this.activeUserId);
+    this.storageService.setItem('users', this.users);
+    this.storageService.setItem('activeUserId', this.activeUserId);
   }
 
   isEmailUnique(email: string): boolean {

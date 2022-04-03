@@ -1,4 +1,5 @@
 export const HOUR_IN_MS = 3_600_000;
+// export const HOUR_IN_MS = 5_000;
 
 export const USERNAME_MIN_LENGTH = 5;
 
