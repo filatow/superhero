@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component,OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { POWERUP_NAMES } from '../consts';
 import { AuthService } from '../services/auth.service';
 import { HeroesService } from '../services/heroes.service';
@@ -14,14 +14,13 @@ import { Hero } from '../shared/interfaces';
   templateUrl: './hero-selection-page.component.html',
   styleUrls: ['./hero-selection-page.component.scss']
 })
-export class HeroSelectionPageComponent implements OnInit, AfterViewInit, OnDestroy {
+export class HeroSelectionPageComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
+  searchInput: FormControl;
   routeQueryParamsSub: Subscription;
   apiSearchSub: Subscription;
   searchInputSub: Subscription;
   searchResults: Hero[] = [];
-  @ViewChild('searchInput') searchInputRef: ElementRef;
-  searchInput$: Observable<InputEvent>;
   savedSearches: string[];
   powerupNames = POWERUP_NAMES;
 
@@ -33,9 +32,25 @@ export class HeroSelectionPageComponent implements OnInit, AfterViewInit, OnDest
     private route: ActivatedRoute,
   ) {}
 
+  private sanitizeSearchInput = (newValue: string) => {
+    const sanitizedValue = newValue
+      .trimStart()
+      .replace(/[^A-Za-z ]/, '')
+      .replace(/[ ]+/g, ' ');
+
+    if (sanitizedValue !== newValue) {
+      this.searchInput.setValue(sanitizedValue);
+    }
+  }
+
   private formInit() {
+    this.searchInput = new FormControl(null, []);
+    this.searchInputSub = this.searchInput.valueChanges.subscribe({
+      next: this.sanitizeSearchInput
+    });
+
     this.searchForm = new FormGroup({
-      searchInput: new FormControl(null, [])
+      searchInput: this.searchInput
     });
   }
 
@@ -55,35 +70,17 @@ export class HeroSelectionPageComponent implements OnInit, AfterViewInit, OnDest
     })
   }
 
-  private sanitizeSearchInput = (inputEvent: InputEvent) => {
-    const inputElement = inputEvent.target as HTMLInputElement;
-
-    this.searchForm.get('searchInput').setValue(
-      inputElement.value
-        .trimStart()
-        .replace(/[^A-Za-z ]/, '')
-        .replace(/[ ]+/g, ' ')
-    );
-  }
-
   ngOnInit(): void {
     this.formInit();
     this.savedSearchesInit();
     this.processQueryParams();
   }
 
-  ngAfterViewInit(): void {
-    this.searchInput$ = fromEvent(this.searchInputRef.nativeElement, 'input');
-    this.searchInputSub = this.searchInput$.subscribe({
-      next: this.sanitizeSearchInput,
-    });
-  }
-
   doSearch(request?: string) {
     if (request) {
-      this.searchForm.get('searchInput').setValue(request);
+      this.searchInput.setValue(request);
     } else {
-      request = this.searchForm.get('searchInput').value.trimEnd();
+      request = this.searchInput.value.trimEnd();
     }
 
     this.apiSearchSub = this.heroesService
@@ -98,7 +95,7 @@ export class HeroSelectionPageComponent implements OnInit, AfterViewInit, OnDest
   }
 
   doSearchByLetter(letter: string) {
-    this.searchForm.get('searchInput').setValue(letter);
+    this.searchInput.setValue(letter);
     this.apiSearchSub = this.heroesService
       .search(letter)
       .subscribe({

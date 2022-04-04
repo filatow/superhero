@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 import { POWERUP_NAMES } from '../consts';
 import { ProfileService } from '../services/profile.service';
-import { FightResult, Hero, Powerup, PowerupBonusPoints } from '../shared/interfaces';
+import { FightResult, Hero, Powerup, HeroPowerstats } from '../shared/interfaces';
 import { DEFAULT_POWERUP_BONUS_POINTS } from './consts';
 
 @Component({
@@ -17,7 +17,7 @@ export class BattlePageComponent implements OnInit {
   powerups: Powerup[];
   lastFightResult: FightResult = null;
   selectedPowerups: Powerup[] = [];
-  bonusPoints: PowerupBonusPoints = DEFAULT_POWERUP_BONUS_POINTS;
+  bonusPoints: HeroPowerstats = DEFAULT_POWERUP_BONUS_POINTS;
   powerupNames: string[] = POWERUP_NAMES;
 
   fightTimerSub: Subscription;

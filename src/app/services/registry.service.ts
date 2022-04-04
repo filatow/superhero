@@ -12,7 +12,6 @@ export class RegistryService {
   ) {
     this.users = this.storageService.getItem('users');
     this.activeUserId = this.storageService.getItem('activeUserId');
-
   }
 
   private actualizeStorage() {

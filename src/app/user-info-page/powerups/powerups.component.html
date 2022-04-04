@@ -10,8 +10,8 @@
         <img
           [class]="{'no-uses-remain': !powerup.usesCount}"
           src="{{ powerup.image }}"
-          width="100"
-          height="133"
+          [width]="powerupImageWidth"
+          [height]="powerupImageHeight"
           alt="{{ powerup.name }} photo"
         />
       </div>

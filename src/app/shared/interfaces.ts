@@ -11,43 +11,40 @@ export interface SessionToken {
   expiryDate: number
 }
 
+export interface HeroPowerstats {
+  intelligence: number | string,
+  strength: number | string,
+  speed: number | string,
+  durability: number | string,
+  power: number | string,
+  combat: number | string
+}
+
+export interface HeroImage {
+  url: string
+}
+
 export interface Hero {
   id: string,
   name: string,
-  powerstats: {
-    intelligence: string,
-    strength: string,
-    speed: string,
-    durability: string,
-    power: string,
-    combat: string
-  },
+  powerstats: HeroPowerstats,
   biography: object,
   appearance: object,
   work: object,
   connections: object,
-  image: {
-    url: string
-  }
+  image: HeroImage
+}
+
+export interface PowerupDescription {
+  powername: string,
+  value: string
 }
 
 export interface Powerup {
   name: string,
   image: string,
-  description: {
-    powername: string,
-    value: string
-  },
+  description: PowerupDescription,
   usesCount: number,
-}
-
-export interface PowerupBonusPoints {
-  intelligence: number,
-  strength: number,
-  speed: number,
-  durability: number,
-  power: number,
-  combat: number
 }
 
 export interface FightResult {
@@ -58,8 +55,8 @@ export interface FightResult {
 }
 
 export interface Profile {
-  searches: Array<string>,
-  heroes: Array<Hero>,
+  searches: string[],
+  heroes: Hero[],
   selectedHeroIndex?: number,
   powerups: Powerup[],
   fightResults: FightResult[]

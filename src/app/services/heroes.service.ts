@@ -27,7 +27,7 @@ export class HeroesService {
       )
   }
 
-  getById(id: number): Observable<Hero> | null {
+  getById(id: number): Observable<Hero | null> {
     return this.http.get(`${environment.heroDbUrl}/${id}`)
       .pipe(
         map((response: Hero) => {
