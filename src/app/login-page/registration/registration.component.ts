@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { nanoid } from 'nanoid';
@@ -13,6 +13,7 @@ import { ParamsMapToMessages, USERNAME_RE, EMAIL_RE, PASSWORD_RE } from '../cons
 
 @Component({
   selector: 'app-registration',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })

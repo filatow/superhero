@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ProfileService } from 'src/app/services/profile.service';
 import { Powerup } from 'src/app/shared/interfaces';
 import { POWERUP_IMAGE_WIDTH, POWERUP_IMAGE_HEIGHT } from './consts'
 
 @Component({
   selector: 'app-powerups',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './powerups.component.html',
   styleUrls: ['./powerups.component.scss']
 })

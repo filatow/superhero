@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ProfileService } from 'src/app/services/profile.service';
 import { Hero } from 'src/app/shared/interfaces';
 import { HERO_IMAGE_HEIGHT, HERO_IMAGE_WIDTH } from './consts';
 
 @Component({
   selector: 'app-user-heroes',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './user-heroes.component.html',
   styleUrls: ['./user-heroes.component.scss']
 })

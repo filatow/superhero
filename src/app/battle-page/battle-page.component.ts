@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 import { POWERUP_NAMES } from '../consts';
@@ -8,6 +8,7 @@ import { DEFAULT_POWERUP_BONUS_POINTS, HERO_IMAGE_WIDTH, HERO_IMAGE_HEIGHT } fro
 
 @Component({
   selector: 'app-battle-page',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './battle-page.component.html',
   styleUrls: ['./battle-page.component.scss']
 })

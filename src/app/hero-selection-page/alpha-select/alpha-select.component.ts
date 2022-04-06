@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { CHARCODE_OF_A, CHARCODE_OF_Z } from 'src/app/consts';
 
 @Component({
   selector: 'app-alpha-select',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './alpha-select.component.html',
   styleUrls: ['./alpha-select.component.scss']
 })

@@ -1,4 +1,4 @@
-import { Component,OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -12,6 +12,7 @@ import { HERO_IMAGE_HEIGHT, HERO_IMAGE_WIDTH } from './consts';
 
 @Component({
   selector: 'app-hero-selection-page',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './hero-selection-page.component.html',
   styleUrls: ['./hero-selection-page.component.scss']
 })
@@ -33,6 +34,7 @@ export class HeroSelectionPageComponent implements OnInit, OnDestroy {
     private heroesService: HeroesService,
     private profileService: ProfileService,
     private route: ActivatedRoute,
+    public cd: ChangeDetectorRef,
   ) {}
 
   private sanitizeSearchInput = (newValue: string) => {

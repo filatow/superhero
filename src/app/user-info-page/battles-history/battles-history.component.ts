@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ProfileService } from 'src/app/services/profile.service';
 import { FightResult } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-battles-history',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './battles-history.component.html',
   styleUrls: ['./battles-history.component.scss']
 })
