@@ -20,7 +20,7 @@ export class BattlesHistoryComponent implements OnInit {
 
   constructor(
     public profileService: ProfileService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.columns = [

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CHARCODE_OF_A, CHARCODE_OF_Z } from 'src/app/consts';
 
 @Component({
@@ -6,7 +6,7 @@ import { CHARCODE_OF_A, CHARCODE_OF_Z } from 'src/app/consts';
   templateUrl: './alpha-select.component.html',
   styleUrls: ['./alpha-select.component.scss']
 })
-export class AlphaSelectComponent implements OnInit {
+export class AlphaSelectComponent {
   isHidden = true;
   searchLetter: string = 'A';
   alphabet: string[] = [];
@@ -16,9 +16,6 @@ export class AlphaSelectComponent implements OnInit {
     for (let i = CHARCODE_OF_A; i <= CHARCODE_OF_Z; i++) {
       this.alphabet.push(String.fromCharCode(i));
     }
-  }
-
-  ngOnInit(): void {
   }
 
   toggleAlphaButtons() {

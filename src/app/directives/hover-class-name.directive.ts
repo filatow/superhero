@@ -11,7 +11,7 @@ export class HoverClassNameDirective implements AfterViewInit {
   constructor(
     private elemRef: ElementRef,
     private renderer: Renderer2
-  ) { }
+  ) {}
 
   ngAfterViewInit(): void {
     this.initialClassName = this.elemRef.nativeElement.className;

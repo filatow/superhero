@@ -8,10 +8,10 @@
   >
     <div class="hero-card__image">
       <img
-        src="{{ hero.image.url }}"
-        width="214"
-        height="285"
-        alt="{{ hero.name }} photo"
+        [src]="hero.image.url"
+        [width]="heroImageWidth"
+        [height]="heroImageHeight"
+        [alt]="hero.name + ' photo'"
       />
     </div>
     <div class="hero-card__stats flex-grow-1">
@@ -67,9 +67,7 @@
         <ng-template let-powerup pTemplate="powerup">
           <div
             class="powerup-name w-full"
-            [pTooltip]="
-              powerup.description.powername + ': ' + powerup.description.value
-            "
+            [pTooltip]="powerup.description.powername + ': ' + powerup.description.value"
           >
             {{ powerup.name }}
             <span class="powerup-amount font-bold">
@@ -87,10 +85,10 @@
   >
     <div class="hero-card__image">
       <img
-        src="{{ enemy.image.url }}"
-        width="214"
-        height="285"
-        alt="{{ enemy.name }} photo"
+        [src]="enemy.image.url"
+        [width]="heroImageWidth"
+        [height]="heroImageHeight"
+        [alt]="enemy.name + ' photo'"
       />
     </div>
     <div class="hero-card__stats flex-grow-1">
@@ -126,9 +124,6 @@
       <div class="fight-animation">
         <img src="../../assets/animations/fight.gif" alt="Fight animation" />
       </div>
-      <!-- <p-progressBar
-        [value]="progressBarValue"
-      ></p-progressBar> -->
       <p-progressBar
         mode="indeterminate"
       ></p-progressBar>

@@ -32,5 +32,4 @@ export class LogoutGuard implements CanActivate, CanActivateChild {
       this.location.back();
     }
   }
-
 }

@@ -22,23 +22,25 @@ export class LoginComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   private messagesInit() {
-    this.routeQueryParamsSub = this.route.queryParams.subscribe((params: Params) => {
-      const messages: Message[] = [];
-      const processibleParams = Object.keys(ParamsMapToMessages);
+    this.routeQueryParamsSub = this.route.queryParams.subscribe({
+      next: (params: Params) => {
+        const messages: Message[] = [];
+        const processibleParams = Object.keys(ParamsMapToMessages);
 
-      for (let param of Object.keys(params)) {
-        if (processibleParams.includes(param)) {
-          messages.push({
-            severity: ParamsMapToMessages[param].severity,
-            detail: ParamsMapToMessages[param].detail
-          })
-        }
+        Object.keys(params).forEach((param: string) => {
+          if (processibleParams.includes(param)) {
+            messages.push({
+              severity: ParamsMapToMessages[param].severity,
+              detail: ParamsMapToMessages[param].detail
+            })
+          }
+        })
+
+        this.messages = messages;
       }
-
-      this.messages = messages;
     })
   }
 
@@ -71,7 +73,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const {email, password} = this.form.value;
+    const { email, password } = this.form.value;
     const user: User = {
       email,
       password,
@@ -80,7 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.login(user);
 
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/selection'],  {
+      this.router.navigate(['/selection'], {
         queryParams: {
           doSearchByLetter: 'A'
         }

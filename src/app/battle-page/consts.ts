@@ -7,3 +7,5 @@ export const DEFAULT_POWERUP_BONUS_POINTS = {
   combat: 0
 }
 
+export const HERO_IMAGE_WIDTH = 214;
+export const HERO_IMAGE_HEIGHT = 285;

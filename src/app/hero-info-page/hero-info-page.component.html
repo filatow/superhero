@@ -3,7 +3,9 @@
 <main class="flex justify-content-center mx-auto py-4">
   <p-card header="{{ hero.name }}" class="w-4 mr-3" styleClass="">
     <div class="hero-page__image">
-      <img src="{{ hero.image.url }}" alt="{{ hero.name }} photo" />
+      <img
+        [src]="hero.image.url"
+        [alt]="hero.name + ' photo'" />
     </div>
   </p-card>
   <p-panel

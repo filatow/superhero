@@ -25,9 +25,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     private validatorsService: ValidatorsService,
     private registrationService: RegistryService,
     private router: Router,
-  ) {}
+  ) { }
 
-  ngOnInit(): void {
+  private formInit() {
     this.form = new FormGroup({
       username: new FormControl(null, [
         Validators.required,
@@ -49,23 +49,36 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     });
   }
 
+  getControl(controlName: string) {
+    return this.form.get(controlName);
+  }
+
+  getControlErrors(controlName: string) {
+    return this.form.get(controlName).errors;
+  }
+
+  ngOnInit(): void {
+    this.formInit();
+  }
 
   signUp() {
     if (this.form.invalid) return;
 
+    const { username, email, password } = this.form.value;
     const newUser: User = {
       id: nanoid(USER_ID_LENGTH),
-      username: this.form.value.username,
-      email: this.form.value.email,
-      password: this.form.value.password
+      username,
+      email,
+      password
     }
 
     this.registrationService.registerUser(newUser);
     this.form.reset();
 
+    const { severity, detail } = ParamsMapToMessages.accountWasCreated;
     this.messages.push({
-      severity: ParamsMapToMessages.accountWasCreated.severity,
-      detail: ParamsMapToMessages.accountWasCreated.detail
+      severity,
+      detail
     });
 
     this.redirectSub = of(true).pipe(delay(5000)).subscribe({
@@ -73,7 +86,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         this.router.navigate(['/login']);
       }
     })
-
   }
 
   ngOnDestroy(): void {

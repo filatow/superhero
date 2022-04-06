@@ -22,5 +22,4 @@ export class PowerupsComponent implements OnInit {
       (a: Powerup, b: Powerup) => (b.name > a.name) ? -1 : 1
     );
   }
-
 }

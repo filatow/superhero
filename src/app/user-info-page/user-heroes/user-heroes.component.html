@@ -1,6 +1,6 @@
 <p-card header="Heroes: {{ heroes.length }}" class="heroes-widget mt-3">
   <p-panel
-    header="{{ hero.name }}"
+    [header]="hero.name"
     class="hero-card"
     styleClass="mb-3"
     *ngFor="let hero of heroes"
@@ -8,10 +8,10 @@
     <div class="flex justify-content-between">
       <div class="hero-card__image">
         <img
-          src="{{ hero.image.url }}"
-          width="150"
-          height="200"
-          alt="{{ hero.name }} photo"
+          [src]="hero.image.url"
+          [width]="heroImageWidth"
+          [height]="heroImageHeight"
+          [alt]="hero.name + ' photo'"
         />
       </div>
       <div class="hero-card__stats flex-grow-1">
@@ -19,9 +19,7 @@
         <ol>
           <li>
             <span class="stat-name">intelligence </span>
-            <strong class="stat-value">{{
-              hero.powerstats.intelligence
-            }}</strong>
+            <strong class="stat-value">{{ hero.powerstats.intelligence }} </strong>
           </li>
           <li>
             <span class="stat-name">strength </span>

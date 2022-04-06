@@ -9,10 +9,10 @@
       <div class="powerup-card__image mr-4">
         <img
           [class]="{'no-uses-remain': !powerup.usesCount}"
-          src="{{ powerup.image }}"
+          [src]="powerup.image"
           [width]="powerupImageWidth"
           [height]="powerupImageHeight"
-          alt="{{ powerup.name }} photo"
+          [alt]="powerup.name + ' photo'"
         />
       </div>
       <div class="flex flex-grow-1 justify-content-between">

@@ -26,7 +26,7 @@
       <p-button
         class="search-preset m-2"
         *ngFor="let searchString of savedSearches"
-        label="{{searchString}}"
+        [label]="searchString"
         styleClass="p-button-sm p-button-outlined p-button-rounded"
         (click)="doSearch(searchString)"
       ></p-button>
@@ -49,7 +49,11 @@
       <div class="flex justify-content-between"
       >
         <div class="hero-card__image">
-          <img src="{{hero.image.url}}" width="150" height="200" alt="{{hero.name}} photo" />
+          <img
+            [src]="hero.image.url"
+            [width]="heroImageWidth"
+            [height]="heroImageHeight"
+            [alt]="hero.name + ' photo'" />
         </div>
         <div class="hero-card__stats flex-grow-1">
           <h4 class="ml-4">Powerstats:</h4>

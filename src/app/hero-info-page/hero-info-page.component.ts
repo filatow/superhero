@@ -15,7 +15,6 @@ export class HeroInfoPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.route.data.subscribe((data) => {
       this.hero = data.hero;
     })

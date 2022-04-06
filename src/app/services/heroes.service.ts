@@ -9,10 +9,9 @@ import { Hero } from "../shared/interfaces";
 @Injectable({ providedIn: 'root' })
 export class HeroesService {
 
-
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
   search(searchedString: string): Observable<Hero[]> {
     return this.http.get(`${environment.heroDbUrl}/search/${searchedString}`)

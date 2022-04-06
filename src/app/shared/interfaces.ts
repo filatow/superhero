@@ -45,6 +45,7 @@ export interface Powerup {
   image: string,
   description: PowerupDescription,
   usesCount: number,
+  inactive?: boolean
 }
 
 export interface FightResult {
@@ -65,9 +66,4 @@ export interface Profile {
 export interface Environment {
   production: boolean,
   heroDbUrl: string
-}
-
-export interface SearchError {
-  response: string,
-  error: string
 }

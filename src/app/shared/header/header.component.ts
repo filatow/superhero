@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { RegistryService } from 'src/app/services/registry.service';
@@ -8,16 +8,13 @@ import { RegistryService } from 'src/app/services/registry.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   constructor(
     private authService: AuthService,
     private registryService: RegistryService,
     public profileService: ProfileService
-  ) { }
-
-  ngOnInit(): void {
-  }
+  ) {}
 
   logout() {
     this.registryService.nullifyActiveUserId();

@@ -8,6 +8,7 @@ import { HeroesService } from '../services/heroes.service';
 import { ProfileService } from '../services/profile.service';
 import { RegistryService } from '../services/registry.service';
 import { Hero } from '../shared/interfaces';
+import { HERO_IMAGE_HEIGHT, HERO_IMAGE_WIDTH } from './consts';
 
 @Component({
   selector: 'app-hero-selection-page',
@@ -23,6 +24,8 @@ export class HeroSelectionPageComponent implements OnInit, OnDestroy {
   searchResults: Hero[] = [];
   savedSearches: string[];
   powerupNames = POWERUP_NAMES;
+  heroImageWidth = HERO_IMAGE_WIDTH;
+  heroImageHeight = HERO_IMAGE_HEIGHT;
 
   constructor(
     private authService: AuthService,

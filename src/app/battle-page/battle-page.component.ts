@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 import { POWERUP_NAMES } from '../consts';
 import { ProfileService } from '../services/profile.service';
 import { FightResult, Hero, Powerup, HeroPowerstats } from '../shared/interfaces';
-import { DEFAULT_POWERUP_BONUS_POINTS } from './consts';
+import { DEFAULT_POWERUP_BONUS_POINTS, HERO_IMAGE_WIDTH, HERO_IMAGE_HEIGHT } from './consts';
 
 @Component({
   selector: 'app-battle-page',
   templateUrl: './battle-page.component.html',
   styleUrls: ['./battle-page.component.scss']
 })
-export class BattlePageComponent implements OnInit {
+export class BattlePageComponent implements OnInit, OnDestroy {
+  heroImageWidth = HERO_IMAGE_WIDTH;
+  heroImageHeight = HERO_IMAGE_HEIGHT;
   hero: Hero;
   enemy: Hero;
   powerups: Powerup[];
+  routeDataSub: Subscription;
   lastFightResult: FightResult = null;
   selectedPowerups: Powerup[] = [];
   bonusPoints: HeroPowerstats = DEFAULT_POWERUP_BONUS_POINTS;
@@ -33,7 +36,7 @@ export class BattlePageComponent implements OnInit {
   ngOnInit(): void {
     this.hero = this.profileService.getSelectedHero();
 
-    this.route.data.subscribe((data) => {
+    this.routeDataSub = this.route.data.subscribe((data) => {
       this.enemy = data.enemy;
     })
 
@@ -43,12 +46,12 @@ export class BattlePageComponent implements OnInit {
 
   private setPowerups() {
     this.powerups = this.profileService.getPowerups()
-    .sort(
-      (a: Powerup, b: Powerup) => (b.name > a.name) ? -1 : 1
-    ).map((p: Powerup) => {
-      p['inactive'] = !p.usesCount;
-      return p;
-    });
+      .sort(
+        (a: Powerup, b: Powerup) => (b.name > a.name) ? -1 : 1
+      ).map((p: Powerup) => {
+        p.inactive = !p.usesCount;
+        return p;
+      });
   }
 
   private executeFightProcess() {
@@ -104,25 +107,22 @@ export class BattlePageComponent implements OnInit {
   }
 
   getVictoryProbability(): number {
-    let heroStrongSidesCount = 0;
-    const DEFAULT_EQUALIZING_VALUE = 100;
+    const heroStrongSidesCount = this.powerupNames.reduce(
+      (accum: number, powerupName: string) => {
+        const heroPowerstat = +this.hero.powerstats[powerupName] +
+          +this.bonusPoints[powerupName];
+        const enemyPowerstat = +this.enemy.powerstats[powerupName];
 
-    for (let powerupName of this.powerupNames) {
-      let heroPowerstatValue: number = DEFAULT_EQUALIZING_VALUE;
-      let enemyPowerstatValue: number = DEFAULT_EQUALIZING_VALUE;
+        if (isNaN(heroPowerstat) || isNaN(enemyPowerstat)) {
+          accum += 0.5;
+        } else if (heroPowerstat === enemyPowerstat) {
+          accum += 0.5;
+        } else if (heroPowerstat > enemyPowerstat) {
+          accum++;
+        }
 
-      if (this.hero.powerstats[powerupName] !== 'null' &&
-          this.enemy.powerstats[powerupName] !== 'null') {
-        heroPowerstatValue = +this.hero.powerstats[powerupName] + +this.bonusPoints[powerupName];
-        enemyPowerstatValue = +this.enemy.powerstats[powerupName];
-      }
-
-      if (heroPowerstatValue > enemyPowerstatValue) {
-        heroStrongSidesCount++;
-      } else if (heroPowerstatValue === enemyPowerstatValue) {
-        heroStrongSidesCount += 0.5;
-      }
-    }
+        return accum;
+      }, 0);
 
     return heroStrongSidesCount / this.powerupNames.length;
   }
@@ -147,5 +147,11 @@ export class BattlePageComponent implements OnInit {
   fight() {
     this.showFightModal();
     this.executeFightProcess();
+  }
+
+  ngOnDestroy(): void {
+    if (this.routeDataSub) {
+      this.routeDataSub.unsubscribe();
+    }
   }
 }
