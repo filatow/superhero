@@ -93,6 +93,7 @@ export class HeroSelectionPageComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response: Hero[]) => {
           this.searchResults = response;
+          this.cd.markForCheck();
         }
       });
 
@@ -108,6 +109,7 @@ export class HeroSelectionPageComponent implements OnInit, OnDestroy {
           this.searchResults = response.filter(
             (hero: Hero) => hero.name.startsWith(letter)
           );
+          this.cd.markForCheck();
         }
       });
   }

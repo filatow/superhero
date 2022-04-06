@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 import { POWERUP_NAMES } from '../consts';
@@ -31,7 +31,8 @@ export class BattlePageComponent implements OnInit, OnDestroy {
 
   constructor(
     private profileService: ProfileService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
@@ -69,6 +70,8 @@ export class BattlePageComponent implements OnInit, OnDestroy {
 
         this.resetBonusPoints();
         this.clearSelectedPowerups();
+
+        this.cd.detectChanges();
       },
       complete: () => {
         this.fightTimerSub.unsubscribe();
