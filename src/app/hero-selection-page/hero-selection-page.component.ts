@@ -128,6 +128,10 @@ export class HeroSelectionPageComponent implements OnInit, OnDestroy {
     this.authService.logout();
   }
 
+  trackItem(_index: number, item: any) {
+    return item.id || item;
+  }
+
   ngOnDestroy(): void {
     if (this.apiSearchSub) {
       this.apiSearchSub.unsubscribe();

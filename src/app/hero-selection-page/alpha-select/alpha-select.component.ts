@@ -28,4 +28,8 @@ export class AlphaSelectComponent {
     this.searchLetter = letter;
     this.toggleAlphaButtons();
   }
+
+  trackItem(_index: number, item: any) {
+    return item.id || item;
+  }
 }

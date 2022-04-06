@@ -3,7 +3,7 @@
     [header]="hero.name"
     class="hero-card"
     styleClass="mb-3"
-    *ngFor="let hero of heroes"
+    *ngFor="let hero of heroes; trackBy: trackItem"
   >
     <div class="flex justify-content-between">
       <div class="hero-card__image">

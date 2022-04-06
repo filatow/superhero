@@ -17,7 +17,7 @@
     <div class="hero-card__stats flex-grow-1">
       <h4 class="ml-4">Powerstats:</h4>
       <ol>
-        <li *ngFor="let powerupName of powerupNames">
+        <li *ngFor="let powerupName of powerupNames; trackBy: trackItem">
           <span class="stat-name">{{ powerupName }} </span>
           <strong class="stat-value">{{ hero.powerstats[powerupName] }}</strong>
           <strong
@@ -94,7 +94,7 @@
     <div class="hero-card__stats flex-grow-1">
       <h4 class="ml-4">Powerstats:</h4>
       <ol>
-        <li *ngFor="let powerupName of powerupNames">
+        <li *ngFor="let powerupName of powerupNames; trackBy: trackItem">
           <span class="stat-name">{{ powerupName }} </span>
           <strong class="stat-value">{{
             enemy.powerstats[powerupName]

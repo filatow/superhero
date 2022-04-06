@@ -150,6 +150,10 @@ export class BattlePageComponent implements OnInit, OnDestroy {
     this.executeFightProcess();
   }
 
+  trackItem(_index: number, item: any) {
+    return item;
+  }
+
   ngOnDestroy(): void {
     if (this.routeDataSub) {
       this.routeDataSub.unsubscribe();

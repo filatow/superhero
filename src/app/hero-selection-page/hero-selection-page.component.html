@@ -25,7 +25,7 @@
       <span>recent: </span>
       <p-button
         class="search-preset m-2"
-        *ngFor="let searchString of savedSearches"
+        *ngFor="let searchString of savedSearches; trackBy: trackItem"
         [label]="searchString"
         styleClass="p-button-sm p-button-outlined p-button-rounded"
         (click)="doSearch(searchString)"
@@ -44,7 +44,7 @@
       header="{{hero.name}}"
       class="hero-card"
       styleClass="mb-3"
-      *ngFor="let hero of searchResults"
+      *ngFor="let hero of searchResults; trackBy: trackItem"
     >
       <div class="flex justify-content-between"
       >
@@ -59,7 +59,7 @@
           <h4 class="ml-4">Powerstats:</h4>
           <ol>
             <li
-              *ngFor="let powerupName of powerupNames"
+              *ngFor="let powerupName of powerupNames; trackBy: trackItem"
             >
               <span class="stat-name">{{ powerupName }} </span>
               <strong class="stat-value">{{ hero.powerstats[powerupName] }}</strong>

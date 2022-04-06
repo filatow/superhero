@@ -32,4 +32,8 @@ export class UserHeroesComponent implements OnInit {
     this.profileService.setSelectedHeroIndex(heroId);
     this.selectedHeroIndex = this.profileService.getSelectedHeroIndex();
   }
+
+  trackItem(_index: number, item: any) {
+    return item.id || item;
+  }
 }

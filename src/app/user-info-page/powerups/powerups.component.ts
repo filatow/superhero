@@ -23,4 +23,8 @@ export class PowerupsComponent implements OnInit {
       (a: Powerup, b: Powerup) => (b.name > a.name) ? -1 : 1
     );
   }
+
+  trackItem(_index: number, item: any) {
+    return item.id || item;
+  }
 }

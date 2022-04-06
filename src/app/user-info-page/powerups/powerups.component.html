@@ -3,7 +3,7 @@
     header="{{ powerup.name }}"
     class="powerup-card"
     styleClass="mb-3"
-    *ngFor="let powerup of powerups"
+    *ngFor="let powerup of powerups; trackBy: trackItem"
   >
     <div class="flex justify-content-start">
       <div class="powerup-card__image mr-4">
